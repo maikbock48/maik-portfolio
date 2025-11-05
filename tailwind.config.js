@@ -20,14 +20,14 @@ module.exports = {
       xl: "1200px",
     },
     fontFamily: {
-      primary: "var(--font-jetbrainsMono)",
+      primary: "var(--font-poppins)",
     },
     extend: {
       colors: {
         primary: "#1c1c22",
         accent: {
-          DEFAULT: "#00ff99",
-          hover: "#00e187",
+          DEFAULT: "#00d9ff",
+          hover: "#00b8ff",
         },
       },
 

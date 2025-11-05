@@ -8,28 +8,28 @@ const services = [
     num: "01",
     title: "Web Development",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "I build fast, reliable web experiences using modern frameworks and clean architecture.",
     href: "",
   },
   {
     num: "02",
     title: "UI/UX Design",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "I design and prototype interfaces that feel natural - simple, intuitive... and next level!",
     href: "",
   },
   {
     num: "03",
     title: "Logo Design",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "I craft bold, memorable identities - and built my own logo-generator tool to create unique designs at speed",
     href: "",
   },
   {
     num: "04",
     title: "SEO",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "I optimize content and structure so search engines actuallz care -  and people actually click.",
     href: "",
   },
 ];
@@ -61,9 +61,10 @@ const Services = () => {
                   </div>
                   <Link
                     href={service.href}
-                    className="w-[70px] h-[70px] rounded-full bg-white group-hover:bg-accent transition-all duration-500 flex justify-center items-center hover:-rotate-45"
+                    className="w-[70px] h-[70px] rounded-full bg-white overflow-hidden relative flex justify-center items-center hover:-rotate-45 transition-transform duration-500"
                   >
-                    <BsArrowDownRight className="text-primary text-3xl" />
+                    <div className="absolute inset-0 bg-accent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+                    <BsArrowDownRight className="text-primary text-3xl relative z-10" />
                   </Link>
                 </div>
                 {/* title */}
