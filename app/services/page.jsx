@@ -9,28 +9,28 @@ const services = [
     title: "Web Development",
     description:
       "I build fast, reliable web experiences using modern frameworks and clean architecture.",
-    href: "",
+    href: "/services/web-development",
   },
   {
     num: "02",
     title: "UI/UX Design",
     description:
       "I design and prototype interfaces that feel natural - simple, intuitive... and next level!",
-    href: "",
+    href: "/services/ui-ux-design",
   },
   {
     num: "03",
     title: "Logo Design",
     description:
       "I craft bold, memorable identities - and built my own logo-generator tool to create unique designs at speed",
-    href: "",
+    href: "/services/logo-design",
   },
   {
     num: "04",
     title: "SEO",
     description:
       "I optimize content and structure so search engines actuallz care -  and people actually click.",
-    href: "",
+    href: "/services/seo",
   },
 ];
 

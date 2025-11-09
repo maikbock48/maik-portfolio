@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -37,6 +38,50 @@ const info = [
 import { motion } from "framer-motion";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({
+          firstname: "",
+          lastname: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -50,29 +95,56 @@ const Contact = () => {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
               <h3 className="text-4xl text-accent">Let's work together</h3>
               <p className="text-white/60">
                 If you are serious about building something great, reach out - I move fast and expect the same.
               </p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="Firstname" />
-                <Input type="lastname" placeholder="Lastname" />
-                <Input type="email" placeholder="Email address" />
-                <Input type="phone" placeholder="Phone number" />
+                <Input
+                  type="text"
+                  placeholder="Firstname"
+                  value={formData.firstname}
+                  onChange={(e) => setFormData({...formData, firstname: e.target.value})}
+                  required
+                />
+                <Input
+                  type="text"
+                  placeholder="Lastname"
+                  value={formData.lastname}
+                  onChange={(e) => setFormData({...formData, lastname: e.target.value})}
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="Email address"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  required
+                />
+                <Input
+                  type="tel"
+                  placeholder="Phone number"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                />
               </div>
               {/* select */}
-              <Select>
+              <Select
+                value={formData.service}
+                onValueChange={(value) => setFormData({...formData, service: value})}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Select a service</SelectLabel>
-                    <SelectItem value="est">Web Development</SelectItem>
-                    <SelectItem value="cst">UI/UX Design</SelectItem>
-                    <SelectItem value="mst">Logo Design</SelectItem>
+                    <SelectItem value="Web Development">Web Development</SelectItem>
+                    <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
+                    <SelectItem value="Logo Design">Logo Design</SelectItem>
+                    <SelectItem value="SEO">SEO</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -80,10 +152,20 @@ const Contact = () => {
               <Textarea
                 className="h-[200px]"
                 placeholder="Type your message here."
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                required
               />
+              {/* status message */}
+              {submitStatus === "success" && (
+                <p className="text-green-500">Message sent successfully!</p>
+              )}
+              {submitStatus === "error" && (
+                <p className="text-red-500">Failed to send message. Please try again.</p>
+              )}
               {/* btn */}
-              <Button size="md" className="max-w-40">
-                Send message
+              <Button size="md" className="max-w-40" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send message"}
               </Button>
             </form>
           </div>

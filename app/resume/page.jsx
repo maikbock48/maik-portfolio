@@ -27,7 +27,7 @@ const about = {
     },
     {
       fieldName: "Experience",
-      fieldValue: "1+ Year",
+      fieldValue: "2+ Years",
     },
     {
       fieldName: "Nickname",
@@ -81,7 +81,7 @@ const education = {
   items: [
     {
       institution: "Syntex Institute",
-      degree: "Programming Course",
+      degree: "Web Developers Programming Course",
       duration: "2025",
     },
     {
@@ -91,7 +91,7 @@ const education = {
     },
     {
       institution: "Scrimba",
-      degree: "Web Essentials",
+      degree: "Web Developer Essentials",
       duration: "2023",
     },
     {
