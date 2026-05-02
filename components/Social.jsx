@@ -88,7 +88,7 @@ const Social = ({ containerStyles, iconStyles }) => {
               <h2 className="text-3xl font-bold text-white">Coming soon!</h2>
               <p className="text-white/60 text-sm leading-relaxed">
                 Still figuring out how to look cool on camera.<br />
-                Check back once I've practiced my intro. 🎬
+                Check back once I&apos;ve practiced my intro. 🎬
               </p>
               <button
                 onClick={() => setShowPopup(false)}

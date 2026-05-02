@@ -149,8 +149,8 @@ const AIEngineering = () => {
         {/* ── CTA ── */}
         <div className="flex flex-col xl:flex-row items-center justify-between gap-6 border-t border-white/10 pt-10">
           <div>
-            <h2 className="text-3xl font-bold text-white">Let's build something smart</h2>
-            <p className="text-white/50 mt-1">Chatbot, RAG system, automated workflow — let's scope it.</p>
+            <h2 className="text-3xl font-bold text-white">Let&apos;s build something smart</h2>
+            <p className="text-white/50 mt-1">Chatbot, RAG system, automated workflow — let&apos;s scope it.</p>
           </div>
           <Link
             href="/contact"

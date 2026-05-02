@@ -28,7 +28,7 @@ const capabilities = [
   "Full-lifecycle deployment from concept to launch",
 ];
 
-const process = [
+const buildSteps = [
   { num: "01", title: "Define", desc: "Data models, API contracts & service boundaries" },
   { num: "02", title: "Architect", desc: "Right stack, right structure — built to scale" },
   { num: "03", title: "Build", desc: "Endpoints, validation, tests, docs" },
@@ -73,10 +73,10 @@ const BackendDevelopment = () => {
             <span className="ml-4 text-xs text-white/30 font-mono">api/routes/users.js</span>
           </div>
           <pre className="p-6 text-sm font-mono overflow-x-auto leading-relaxed">
-            <span className="text-white/30">// GET /api/users/:id — clean, typed, documented</span>{"\n"}
+            <span className="text-white/30">{"// GET /api/users/:id — clean, typed, documented"}</span>{"\n"}
             <span className="text-accent">router</span>
             <span className="text-white/60">.get(</span>
-            <span className="text-yellow-300/80">'/:id'</span>
+            <span className="text-yellow-300/80">{"'/:id'"}</span>
             <span className="text-white/60">, </span>
             <span className="text-accent">authenticate</span>
             <span className="text-white/60">, </span>
@@ -95,7 +95,7 @@ const BackendDevelopment = () => {
             <span className="text-white/60">.status(</span>
             <span className="text-yellow-300/80">404</span>
             <span className="text-white/60">).json({"{"} </span>
-            <span className="text-yellow-300/80">error: 'Not found'</span>
+            <span className="text-yellow-300/80">{"error: 'Not found'"}</span>
             <span className="text-white/60"> {"}"});</span>{"\n"}
             {"  "}<span className="text-accent">res</span>
             <span className="text-white/60">.json(</span>
@@ -138,10 +138,10 @@ const BackendDevelopment = () => {
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-white mb-8">Process</h2>
           <div className="relative flex flex-col xl:flex-row gap-0">
-            {process.map((step, i) => (
+            {buildSteps.map((step, i) => (
               <div key={step.num} className="flex xl:flex-col flex-1 xl:items-start items-center gap-4 xl:gap-3 relative">
                 {/* connector line */}
-                {i < process.length - 1 && (
+                {i < buildSteps.length - 1 && (
                   <div className="hidden xl:block absolute top-[18px] left-[calc(50%+18px)] right-[-50%] h-px bg-accent/30" />
                 )}
                 <div className="w-9 h-9 rounded-full bg-accent/20 border border-accent/50 flex items-center justify-center shrink-0">
@@ -160,7 +160,7 @@ const BackendDevelopment = () => {
         <div className="flex flex-col xl:flex-row items-center justify-between gap-6 border-t border-white/10 pt-10">
           <div>
             <h2 className="text-3xl font-bold text-white">Need a solid backend?</h2>
-            <p className="text-white/50 mt-1">API, database, Docker — let's scope it and ship it.</p>
+            <p className="text-white/50 mt-1">API, database, Docker — let&apos;s scope it and ship it.</p>
           </div>
           <Link
             href="/contact"

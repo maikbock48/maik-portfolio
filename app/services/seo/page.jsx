@@ -171,7 +171,7 @@ const SEO = () => {
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
             <h2 className="text-4xl font-bold text-white">Ready to Rank Higher?</h2>
             <p className="text-white/60 max-w-[600px]">
-              Let's optimize your site and start driving organic traffic that converts.
+              Let&apos;s optimize your site and start driving organic traffic that converts.
             </p>
             <Link
               href="/contact"

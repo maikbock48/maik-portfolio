@@ -113,7 +113,7 @@ const LogoDesign = () => {
 
           {/* Deliverables */}
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
-            <h2 className="text-4xl font-bold text-white">What You'll Receive</h2>
+            <h2 className="text-4xl font-bold text-white">What You&apos;ll Receive</h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {deliverables.map((item, index) => (
                 <li key={index} className="flex items-center gap-3">
@@ -128,7 +128,7 @@ const LogoDesign = () => {
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
             <h2 className="text-4xl font-bold text-white">Ready for a Bold Identity?</h2>
             <p className="text-white/60 max-w-[600px]">
-              Let's create a logo that makes your brand impossible to ignore.
+              Let&apos;s create a logo that makes your brand impossible to ignore.
             </p>
             <Link
               href="/contact"

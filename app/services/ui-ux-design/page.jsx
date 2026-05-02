@@ -131,9 +131,9 @@ const UIUXDesign = () => {
 
           {/* CTA */}
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
-            <h2 className="text-4xl font-bold text-white">Let's Design Together</h2>
+            <h2 className="text-4xl font-bold text-white">Let&apos;s Design Together</h2>
             <p className="text-white/60 max-w-[600px]">
-              Ready to create an exceptional user experience? Let's talk about your project.
+              Ready to create an exceptional user experience? Let&apos;s talk about your project.
             </p>
             <Link
               href="/contact"

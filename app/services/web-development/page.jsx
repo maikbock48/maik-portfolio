@@ -107,7 +107,7 @@ const WebDevelopment = () => {
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
             <h2 className="text-4xl font-bold text-white">Ready to Start?</h2>
             <p className="text-white/60 max-w-[600px]">
-              Let's build something great together. Reach out and let's discuss your project.
+              Let&apos;s build something great together. Reach out and let&apos;s discuss your project.
             </p>
             <Link
               href="/contact"
