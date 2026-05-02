@@ -72,37 +72,42 @@ const BackendDevelopment = () => {
             <span className="w-3 h-3 rounded-full bg-green-500/70" />
             <span className="ml-4 text-xs text-white/30 font-mono">api/routes/users.js</span>
           </div>
-          <pre className="p-6 text-sm font-mono overflow-x-auto leading-relaxed">
-            <span className="text-white/30">{"// GET /api/users/:id — clean, typed, documented"}</span>{"\n"}
-            <span className="text-accent">router</span>
-            <span className="text-white/60">.get(</span>
-            <span className="text-yellow-300/80">{"'/:id'"}</span>
-            <span className="text-white/60">, </span>
-            <span className="text-accent">authenticate</span>
-            <span className="text-white/60">, </span>
-            <span className="text-white/80">async </span>
-            <span className="text-white/60">(req, res) {"=>"} {"{"}</span>{"\n"}
-            {"  "}<span className="text-white/60">const </span>
-            <span className="text-white/80">user </span>
-            <span className="text-white/60">= await </span>
-            <span className="text-accent">UserService</span>
-            <span className="text-white/60">.findById(req.params.id);</span>{"\n"}
-            {"  "}<span className="text-white/60">if (!</span>
-            <span className="text-white/80">user</span>
-            <span className="text-white/60">) </span>
-            <span className="text-white/80">return </span>
-            <span className="text-accent">res</span>
-            <span className="text-white/60">.status(</span>
-            <span className="text-yellow-300/80">404</span>
-            <span className="text-white/60">).json({"{"} </span>
-            <span className="text-yellow-300/80">{"error: 'Not found'"}</span>
-            <span className="text-white/60"> {"}"});</span>{"\n"}
-            {"  "}<span className="text-accent">res</span>
-            <span className="text-white/60">.json(</span>
-            <span className="text-white/80">user</span>
-            <span className="text-white/60">);</span>{"\n"}
-            <span className="text-white/60">{"}"});</span>
-          </pre>
+          <div className="p-6 text-sm font-mono leading-7 overflow-x-auto">
+            <div><span className="text-white/30">{"// GET /api/users/:id — clean, typed, documented"}</span></div>
+            <div>
+              <span className="text-accent">router</span>
+              <span className="text-white/60">.get(</span>
+              <span className="text-yellow-300/80">{"'/:id'"}</span>
+              <span className="text-white/60">, </span>
+              <span className="text-accent">authenticate</span>
+              <span className="text-white/60">{", async (req, res) => {"}</span>
+            </div>
+            <div className="pl-6">
+              <span className="text-white/60">{"const "}</span>
+              <span className="text-white/80">user </span>
+              <span className="text-white/60">{"= await "}</span>
+              <span className="text-accent">UserService</span>
+              <span className="text-white/60">.findById(req.params.id);</span>
+            </div>
+            <div className="pl-6">
+              <span className="text-white/60">{"if (!"}</span>
+              <span className="text-white/80">user</span>
+              <span className="text-white/60">{") return "}</span>
+              <span className="text-accent">res</span>
+              <span className="text-white/60">.status(</span>
+              <span className="text-yellow-300/80">404</span>
+              <span className="text-white/60">{").json({ "}</span>
+              <span className="text-yellow-300/80">{"error: 'Not found'"}</span>
+              <span className="text-white/60">{" });"}</span>
+            </div>
+            <div className="pl-6">
+              <span className="text-accent">res</span>
+              <span className="text-white/60">.json(</span>
+              <span className="text-white/80">user</span>
+              <span className="text-white/60">);</span>
+            </div>
+            <div><span className="text-white/60">{"});"}</span></div>
+          </div>
         </div>
 
         {/* ── TWO-COL: STACK + CAPABILITIES ── */}

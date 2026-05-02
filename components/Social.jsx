@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Social = ({ containerStyles, iconStyles }) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [showTwitterPopup, setShowTwitterPopup] = useState(false);
   const [githubClicked, setGithubClicked] = useState(false);
 
   return (
@@ -60,11 +61,12 @@ const Social = ({ containerStyles, iconStyles }) => {
         </button>
 
         {/* Twitter */}
-        <Link href="" className={iconStyles}>
+        <button className={iconStyles} onClick={() => setShowTwitterPopup(true)}>
           <FaTwitter />
-        </Link>
+        </button>
       </div>
 
+      {/* YouTube popup */}
       <AnimatePresence>
         {showPopup && (
           <>
@@ -95,6 +97,43 @@ const Social = ({ containerStyles, iconStyles }) => {
                 className="mt-2 px-6 py-2 rounded-full border border-accent text-accent text-sm font-semibold hover:bg-accent hover:text-primary transition-all duration-300"
               >
                 Got it
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Twitter / DYOR popup */}
+      <AnimatePresence>
+        {showTwitterPopup && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowTwitterPopup(false)}
+            />
+            <motion.div
+              className="fixed top-1/2 left-1/2 z-50 bg-[#1c1c22] border border-red-500/30 rounded-2xl p-10 flex flex-col items-center gap-4 shadow-[0_0_60px_rgba(239,68,68,0.15)] max-w-sm w-[90vw] text-center"
+              initial={{ opacity: 0, scale: 0.85, x: "-50%", y: "-48%" }}
+              animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+              exit={{ opacity: 0, scale: 0.85, x: "-50%", y: "-48%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <div className="text-6xl text-red-500">
+                <FaTwitter />
+              </div>
+              <h2 className="text-3xl font-bold text-white">Access denied!</h2>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Sorry, only for business partners &amp; friends.<br />
+                <span className="text-red-400 font-semibold">DYOR!</span>
+              </p>
+              <button
+                onClick={() => setShowTwitterPopup(false)}
+                className="mt-2 px-6 py-2 rounded-full border border-red-500 text-red-400 text-sm font-semibold hover:bg-red-500 hover:text-white transition-all duration-300"
+              >
+                Understood
               </button>
             </motion.div>
           </>
