@@ -34,7 +34,7 @@ const Contact = () => {
 
   const info = [
     { icon: <FaPhoneAlt />, title: c.infoPhone, description: "(+49) 162 631 0090" },
-    { icon: <FaEnvelope />, title: c.infoEmail, description: "maik.bock48@gmail.com" },
+    { icon: <FaEnvelope />, title: c.infoEmail, description: "coding.maikel@gmail.com" },
     { icon: <FaMapMarkerAlt />, title: c.infoAddress, description: "Cologne, Germany" },
   ];
 
@@ -103,7 +103,7 @@ const Contact = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Textarea className="h-[200px]" placeholder={c.message} value={formData.message}
+              <Textarea className="h-[180px]" placeholder={c.message} value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
               {submitStatus === "success" && <p className="text-green-500">{c.success}</p>}
               {submitStatus === "error" && <p className="text-red-500">{c.error}</p>}
