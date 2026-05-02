@@ -20,15 +20,15 @@ const Photo = () => {
             opacity: 1,
             transition: { delay: 2.4, duration: 0.4, ease: "easeInOut" },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute left-[10px]"
+          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.85]"
         >
           <Image
             src="/assets/maik.png"
             priority
-            quality={100}
+            quality={80}
             fill
             alt=""
-            className="object-contain"
+            className="object-cover"
           />
         </motion.div>
 

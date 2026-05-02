@@ -153,6 +153,7 @@ const Work = () => {
                           fill
                           className="object-cover"
                           alt=""
+                          loading="lazy"
                         />
                       </div>
                     </div>

@@ -6,33 +6,20 @@ import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/language-context";
 
-const links = [
-  {
-    name: "home",
-    path: "/",
-  },
-  {
-    name: "services",
-    path: "/services",
-  },
-  {
-    name: "resume",
-    path: "/resume",
-  },
-  {
-    name: "work",
-    path: "/work",
-  },
-  {
-    name: "contact",
-    path: "/contact",
-  },
+const navPaths = [
+  { key: "home", path: "/" },
+  { key: "services", path: "/services" },
+  { key: "resume", path: "/resume" },
+  { key: "work", path: "/work" },
+  { key: "contact", path: "/contact" },
 ];
 
 const MobileNav = () => {
   const pathname = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const { t } = useLanguage();
 
   return (
     <Sheet>
@@ -50,9 +37,10 @@ const MobileNav = () => {
         </div>
         {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8">
-          {links.map((link, index) => {
+          {navPaths.map((link, index) => {
             const isActive = link.path === pathname;
-            const showUnderline = hoveredIndex === index || (isActive && hoveredIndex === null);
+            const showUnderline =
+              hoveredIndex === index || (isActive && hoveredIndex === null);
 
             return (
               <Link
@@ -64,7 +52,7 @@ const MobileNav = () => {
                   isActive ? "text-accent" : ""
                 } text-xl capitalize hover:text-accent transition-colors relative pb-1`}
               >
-                {link.name}
+                {t.nav[link.key]}
                 {showUnderline && (
                   <motion.div
                     layoutId="mobileUnderline"
