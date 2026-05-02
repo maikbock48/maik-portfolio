@@ -10,8 +10,9 @@ import TypewriterHeading from "@/components/TypewriterHeading";
 import { useLanguage } from "@/lib/language-context";
 
 const Home = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const h = t.home;
+  const cvLang = lang === "de" ? "de" : "en";
 
   return (
     <section className="h-full">
@@ -24,7 +25,7 @@ const Home = () => {
             <p className="max-w-[500px] mb-9 text-white/80">{h.description}</p>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
-              <a href="/cv.html" target="_blank" rel="noopener noreferrer">
+              <a href={`/cv.html?lang=${cvLang}`} target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="outline"
                   size="lg"

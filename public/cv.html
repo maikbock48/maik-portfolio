@@ -1417,10 +1417,13 @@ const T = {
   }
 };
 
-let lang = 'de';
+const urlLang = new URLSearchParams(window.location.search).get('lang');
+let lang = (urlLang === 'en' || urlLang === 'de') ? urlLang : 'de';
+document.documentElement.lang = lang;
 
 function toggleLang() {
   lang = lang === 'de' ? 'en' : 'de';
+  document.documentElement.lang = lang;
   document.getElementById('langLabel').textContent = lang === 'de' ? 'EN' : 'DE';
   applyLang();
 }
@@ -1463,6 +1466,10 @@ function applyLang() {
   const sigHintEl = document.getElementById('sig-hint'); if (sigHintEl) sigHintEl.textContent = t.sigHint;
   document.getElementById('sig-lbl').textContent = t.sigLbl;
 }
+
+// Initial language sync from URL
+document.getElementById('langLabel').textContent = lang === 'de' ? 'EN' : 'DE';
+if (lang !== 'de') applyLang();
 
 function setCard(id, title, items) {
   const el = document.getElementById(id);
