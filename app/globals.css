@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    min-height: 100%;
+  }
   body {
     @apply font-primary text-white leading-loose;
+    min-height: 100vh;
     background-image: url('/background.png');
     background-size: cover;
     background-position: center;
