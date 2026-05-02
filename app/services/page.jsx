@@ -15,7 +15,7 @@ const Services = () => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
+            transition: { delay: 0.5, duration: 0.3, ease: "easeIn" },
           }}
           className="grid grid-cols-1 md:grid-cols-2 gap-[60px]"
         >
@@ -30,7 +30,7 @@ const Services = () => {
                 </div>
                 <Link
                   href={service.href}
-                  className="w-[70px] h-[70px] rounded-full bg-white overflow-hidden relative flex justify-center items-center hover:-rotate-45 transition-transform duration-500"
+                  className="w-[70px] h-[70px] rounded-full bg-white overflow-hidden relative flex justify-center items-center group-hover:-rotate-45 transition-transform duration-500"
                 >
                   <div className="absolute inset-0 bg-accent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
                   <BsArrowDownRight className="text-primary text-3xl relative z-10" />

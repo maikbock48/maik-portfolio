@@ -1429,7 +1429,7 @@ function applyLang() {
   document.getElementById('int-list').innerHTML = t.interests.map(i => `<li>${i}</li>`).join('');
   document.getElementById('mob-text').textContent = t.mobility;
   document.getElementById('sig-city').textContent = t.sigCity;
-  document.getElementById('sig-hint').textContent = t.sigHint;
+  const sigHintEl = document.getElementById('sig-hint'); if (sigHintEl) sigHintEl.textContent = t.sigHint;
   document.getElementById('sig-lbl').textContent = t.sigLbl;
 }
 
