@@ -105,6 +105,25 @@ body.dark .bc-t { color: #c8ddf0 !important; opacity: .7; }
   position: fixed; top: 20px; right: 20px; z-index: 999;
   display: flex; align-items: center; gap: 8px;
 }
+.toolbar-left {
+  position: fixed; top: 20px; left: 20px; z-index: 999;
+}
+.btn-back {
+  background: #fff; color: var(--navy);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 8px rgba(15,31,61,.10);
+  padding: 10px 16px; text-decoration: none;
+}
+.btn-back:hover { border-color: var(--coral); color: var(--coral); }
+body.dark .btn-back {
+  background: #1e2d40; color: #c8ddf0;
+  border-color: #2a3d54;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+body.dark .btn-back:hover { border-color: #2e7bb5; color: #5baae8; }
+@media print {
+  .toolbar-left { display: none !important; }
+}
 .tb-btn {
   display: flex; align-items: center; gap: 7px;
   font-family: var(--font-mono); font-size: 11px;
@@ -894,6 +913,14 @@ body.dark .btn-pdf {
 </style>
 </head>
 <body>
+
+<!-- BACK BUTTON -->
+<div class="toolbar-left">
+  <a class="tb-btn btn-back" href="/" title="Back to portfolio">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+    <span>Back</span>
+  </a>
+</div>
 
 <!-- TOOLBAR -->
 <div class="toolbar">

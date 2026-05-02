@@ -3,6 +3,7 @@ import "./globals.css";
 
 // components
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 import { LanguageProvider } from "@/lib/language-context";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <Header />
           <StairTransition />
           <PageTransition>{children}</PageTransition>
+          <Footer />
         </LanguageProvider>
       </body>
     </html>
