@@ -9,10 +9,10 @@ const Stats = () => {
   return (
     <section className="pt-4 pb-12 xl:pt-0 xl:pb-0">
       <div className="container mx-auto">
-        <div className="flex flex-wrap gap-6 max-w-[80vw] mx-auto xl:max-w-none">
+        <div className="flex flex-col xl:flex-row gap-6 xl:max-w-none">
           {t.stats.map((item, index) => (
             <div
-              className="flex-1 flex gap-4 items-center justify-center xl:justify-start"
+              className="flex xl:flex-1 gap-4 items-center justify-center xl:justify-start"
               key={index}
             >
               <span className="text-4xl xl:text-6xl font-extrabold">

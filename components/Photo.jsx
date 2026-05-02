@@ -20,7 +20,7 @@ const Photo = () => {
             opacity: 1,
             transition: { delay: 0.9, duration: 0.7, ease: "easeInOut" },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.85]"
+          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.765]"
         >
           <Image
             src="/assets/maik.png"
