@@ -35,7 +35,7 @@ const Contact = () => {
   const info = [
     { icon: <FaPhoneAlt />, title: c.infoPhone, description: "(+49) 162 631 0090" },
     { icon: <FaEnvelope />, title: c.infoEmail, description: "coding.maikel@gmail.com" },
-    { icon: <FaMapMarkerAlt />, title: c.infoAddress, description: "Cologne, Germany" },
+    { icon: <FaMapMarkerAlt />, title: c.infoAddress, description: c.infoAddressValue },
   ];
 
   const handleSubmit = async (e) => {

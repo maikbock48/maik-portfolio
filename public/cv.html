@@ -697,9 +697,16 @@ body.dark .btn-pdf {
   animation: dk-pulse-border-anim 2s ease-in-out infinite;
   box-shadow: 0 0 20px rgba(46,123,181,.5), 0 4px 16px rgba(46,123,181,.3) !important;
 }
-/* Print reset */
+/* Print reset — must beat body.dark [data-dk-enter]:not(.dk-entered) { opacity: 0 } */
 @media print {
-  [data-dk-enter] { opacity: 1 !important; animation: none !important; transform: none !important; filter: none !important; }
+  body.dark [data-dk-enter],
+  body.dark [data-dk-enter]:not(.dk-entered),
+  [data-dk-enter] {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -1466,6 +1473,11 @@ function applyLang() {
   const sigHintEl = document.getElementById('sig-hint'); if (sigHintEl) sigHintEl.textContent = t.sigHint;
   document.getElementById('sig-lbl').textContent = t.sigLbl;
 }
+
+// Force dk-entered on all animated cards before printing so they're visible in dark-mode PDF export
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('[data-dk-enter]').forEach(el => el.classList.add('dk-entered'));
+});
 
 // Initial language sync from URL
 document.getElementById('langLabel').textContent = lang === 'de' ? 'EN' : 'DE';
