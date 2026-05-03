@@ -14,6 +14,17 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: #1c1c22;
+    background-attachment: fixed;
+  }
+  @media (max-width: 768px) {
+    body {
+      background-image:
+        linear-gradient(180deg, rgba(28, 28, 34, 0.55) 0%, rgba(28, 28, 34, 0.88) 70%, rgba(28, 28, 34, 0.96) 100%),
+        url('/background.png');
+      background-size: cover, auto 100vh;
+      background-position: center, top center;
+      background-attachment: scroll;
+    }
   }
   .h1 {
     @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
