@@ -76,8 +76,8 @@ const Contact = () => {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-[22px] px-10 py-[37px] bg-[#27272c] rounded-xl">
-              <h3 className="text-4xl text-accent">{c.title}</h3>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-[22px] px-6 sm:px-10 py-[37px] bg-[#27272c] rounded-xl">
+              <h3 className="text-2xl sm:text-3xl xl:text-4xl text-accent break-words">{c.title}</h3>
               <p className="text-white/60">{c.subtitle}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input type="text" placeholder={c.firstname} value={formData.firstname}

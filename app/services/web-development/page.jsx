@@ -5,37 +5,24 @@ import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaReact, FaNodeJs, FaDatabase, FaMobile } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { useLanguage } from "@/lib/language-context";
 
-const technologies = [
-  { icon: <FaReact />, name: "React.js" },
-  { icon: <SiNextdotjs />, name: "Next.js" },
-  { icon: <FaNodeJs />, name: "Node.js" },
-  { icon: <SiTailwindcss />, name: "Tailwind CSS" },
-  { icon: <SiTypescript />, name: "TypeScript" },
-  { icon: <FaDatabase />, name: "Database Design" },
-  { icon: <FaMobile />, name: "Responsive Design" },
+const techIcons = [
+  <FaReact key="r" />,
+  <SiNextdotjs key="n" />,
+  <FaNodeJs key="no" />,
+  <SiTailwindcss key="t" />,
+  <SiTypescript key="ts" />,
+  <FaDatabase key="d" />,
+  <FaMobile key="m" />,
 ];
-
-const features = [
-  {
-    title: "Modern Frameworks",
-    description: "Building with cutting-edge technologies like React, Next.js, and TypeScript for optimal performance.",
-  },
-  {
-    title: "Performance First",
-    description: "Every line of code is optimized for speed, SEO, and user experience.",
-  },
-  {
-    title: "Scalable Architecture",
-    description: "Clean, maintainable code that grows with your business needs.",
-  },
-  {
-    title: "Responsive Design",
-    description: "Pixel-perfect interfaces that work flawlessly on any device.",
-  },
-];
+const techNames = ["React.js", "Next.js", "Node.js", "Tailwind CSS", "TypeScript", "Database Design", "Responsive Design"];
 
 const WebDevelopment = () => {
+  const { t } = useLanguage();
+  const s = t.serviceDetails;
+  const w = s.web;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -51,7 +38,7 @@ const WebDevelopment = () => {
           href="/services"
           className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-all mb-8"
         >
-          <BsArrowLeft /> Back to Services
+          <BsArrowLeft /> {s.backToServices}
         </Link>
 
         <div className="flex flex-col gap-[60px]">
@@ -60,27 +47,27 @@ const WebDevelopment = () => {
             <div className="text-8xl font-extrabold text-outline text-transparent">
               01
             </div>
-            <h1 className="text-6xl font-bold text-white">Web Development</h1>
-            <p className="max-w-[600px] text-white/60 text-xl">
-              I build fast, reliable web experiences using modern frameworks and clean architecture.
-              From concept to deployment, I deliver solutions that perform.
-            </p>
+            <h1 className="text-5xl sm:text-6xl font-bold text-white leading-[1.05]">
+              <span className="sm:hidden whitespace-pre-line">{w.titleMobile || w.title}</span>
+              <span className="hidden sm:inline">{w.title}</span>
+            </h1>
+            <p className="max-w-[600px] text-white/60 text-xl">{w.subtitle}</p>
           </div>
 
           {/* Technologies */}
           <div className="flex flex-col gap-[30px]">
-            <h2 className="text-4xl font-bold text-white">Technologies I Use</h2>
+            <h2 className="text-4xl font-bold text-white">{w.techHeading}</h2>
             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-              {technologies.map((tech, index) => (
+              {techIcons.map((icon, index) => (
                 <li
                   key={index}
                   className="bg-[#232329] h-[120px] rounded-xl flex flex-col justify-center items-center gap-4 hover:bg-accent transition-all duration-300 group"
                 >
                   <div className="text-5xl text-accent group-hover:text-primary transition-all duration-300">
-                    {tech.icon}
+                    {icon}
                   </div>
                   <p className="text-white/60 group-hover:text-primary transition-all duration-300">
-                    {tech.name}
+                    {techNames[index]}
                   </p>
                 </li>
               ))}
@@ -89,9 +76,9 @@ const WebDevelopment = () => {
 
           {/* Features */}
           <div className="flex flex-col gap-[30px]">
-            <h2 className="text-4xl font-bold text-white">What You Get</h2>
+            <h2 className="text-4xl font-bold text-white">{w.featuresHeading}</h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
-              {features.map((feature, index) => (
+              {w.features.map((feature, index) => (
                 <li
                   key={index}
                   className="bg-[#232329] p-6 rounded-xl flex flex-col gap-4"
@@ -105,15 +92,13 @@ const WebDevelopment = () => {
 
           {/* CTA */}
           <div className="bg-[#232329] p-10 rounded-xl flex flex-col gap-6">
-            <h2 className="text-4xl font-bold text-white">Ready to Start?</h2>
-            <p className="text-white/60 max-w-[600px]">
-              Let&apos;s build something great together. Reach out and let&apos;s discuss your project.
-            </p>
+            <h2 className="text-4xl font-bold text-white">{w.ctaTitle}</h2>
+            <p className="text-white/60 max-w-[600px]">{w.ctaText}</p>
             <Link
               href="/contact"
               className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px]"
             >
-              Get in Touch
+              {s.getInTouch}
             </Link>
           </div>
         </div>

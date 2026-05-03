@@ -1,22 +1,54 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
   const fullText = greeting + " " + name;
   const [displayed, setDisplayed] = useState("");
   const [cursorOn, setCursorOn] = useState(true);
+  const timeoutRef = useRef(null);
+  const fallbackRef = useRef(null);
 
   useEffect(() => {
     setDisplayed("");
     let i = 0;
-    const timer = setInterval(() => {
+    let cancelled = false;
+
+    const tick = () => {
+      if (cancelled) return;
       i++;
       setDisplayed(fullText.slice(0, i));
-      if (i >= fullText.length) clearInterval(timer);
-    }, speed);
-    return () => clearInterval(timer);
+      if (i < fullText.length) {
+        timeoutRef.current = setTimeout(tick, speed);
+      }
+    };
+
+    timeoutRef.current = setTimeout(tick, speed);
+
+    // Safety net: if the animation stalls (e.g., aggressive timer throttling
+    // on some Android browsers), guarantee the full text is shown after a
+    // generous deadline so the user never sees just a partial heading.
+    const deadline = fullText.length * speed * 2 + 1500;
+    fallbackRef.current = setTimeout(() => {
+      if (!cancelled) setDisplayed(fullText);
+    }, deadline);
+
+    return () => {
+      cancelled = true;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (fallbackRef.current) clearTimeout(fallbackRef.current);
+    };
   }, [fullText, speed]);
+
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && displayed.length < fullText.length) {
+        setDisplayed(fullText);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [displayed, fullText]);
 
   useEffect(() => {
     const blink = setInterval(() => setCursorOn((v) => !v), 530);
