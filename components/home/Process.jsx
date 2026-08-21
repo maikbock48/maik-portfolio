@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 import DeployTerminal from "@/components/DeployTerminal";
@@ -8,9 +9,28 @@ import VideoFrame from "@/components/VideoFrame";
 const Process = () => {
   const { t } = useLanguage();
   const p = t.home.process;
+  const midpointRef = useRef(null);
+  const [scrolledToMidpoint, setScrolledToMidpoint] = useState(false);
+
+  useEffect(() => {
+    if (scrolledToMidpoint) return;
+    const checkMidpoint = () => {
+      if (!midpointRef.current) return;
+      if (midpointRef.current.getBoundingClientRect().top <= window.innerHeight / 2) {
+        setScrolledToMidpoint(true);
+      }
+    };
+    checkMidpoint();
+    window.addEventListener("scroll", checkMidpoint, { passive: true });
+    window.addEventListener("resize", checkMidpoint);
+    return () => {
+      window.removeEventListener("scroll", checkMidpoint);
+      window.removeEventListener("resize", checkMidpoint);
+    };
+  }, [scrolledToMidpoint]);
 
   return (
-    <section className="py-14 xl:py-20">
+    <section className="pt-6 xl:pt-8 pb-14 xl:pb-20">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -29,6 +49,7 @@ const Process = () => {
         <div className="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-14 xl:gap-10 items-start">
           {/* process rail */}
           <div className="relative">
+            <div ref={midpointRef} className="absolute top-1/2 left-0 w-px h-px" />
             <div className="absolute left-[27px] top-3 bottom-3 w-px bg-gradient-to-b from-accent/60 to-accent/0" />
             {p.steps.map((step, index) => (
               <motion.div
@@ -55,15 +76,15 @@ const Process = () => {
           </div>
 
           {/* terminal + video */}
-          <div className="flex flex-col gap-8 xl:sticky xl:top-24">
+          <div className="flex flex-col gap-8 xl:gap-6 xl:sticky xl:top-24">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
-              className="flex justify-center xl:justify-start"
+              className="flex justify-center xl:justify-start xl:pl-3 xl:mt-2"
             >
-              <DeployTerminal />
+              <DeployTerminal startAnimation={scrolledToMidpoint} />
             </motion.div>
 
             <motion.div
@@ -71,6 +92,7 @@ const Process = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex justify-center xl:justify-start xl:pl-3 xl:max-w-[420px]"
             >
               <VideoFrame
                 caption={p.video.caption}

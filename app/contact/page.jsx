@@ -15,7 +15,19 @@ import {
 } from "@/components/ui/select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { QRCodeSVG } from "qrcode.react";
 import { useLanguage } from "@/lib/language-context";
+
+const VCARD = [
+  "BEGIN:VCARD",
+  "VERSION:3.0",
+  "N:Bock;Maik;;;",
+  "FN:Maik Bock",
+  "TEL;TYPE=CELL:+491626310090",
+  "EMAIL:coding.maikel@gmail.com",
+  "URL:https://codewithmaik.vercel.app",
+  "END:VCARD",
+].join("\n");
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -126,19 +138,27 @@ const Contact = () => {
           </div>
           {/* info */}
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
-            <ul className="flex flex-col gap-10">
-              {info.map((item, index) => (
-                <li key={index} className="flex items-center gap-6">
-                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
-                    <div className="text-[28px]">{item.icon}</div>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-white/60">{item.title}</p>
-                    <h3 className="text-xl">{item.description}</h3>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-10">
+              <ul className="flex flex-col gap-10">
+                {info.map((item, index) => (
+                  <li key={index} className="flex items-center gap-6">
+                    <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                      <div className="text-[28px]">{item.icon}</div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white/60">{item.title}</p>
+                      <h3 className="text-xl">{item.description}</h3>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center gap-4">
+                <div className="bg-white p-2 rounded-lg shrink-0">
+                  <QRCodeSVG value={VCARD} size={88} bgColor="#ffffff" fgColor="#1c1c22" level="M" />
+                </div>
+                <p className="text-white/50 text-xs max-w-[150px] leading-relaxed">{c.qrCaption}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

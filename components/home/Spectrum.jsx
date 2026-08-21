@@ -8,7 +8,7 @@ const Spectrum = () => {
   const s = t.home.spectrum;
 
   return (
-    <section className="py-14 xl:py-20">
+    <section className="pt-14 xl:pt-20 pb-6 xl:pb-8">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

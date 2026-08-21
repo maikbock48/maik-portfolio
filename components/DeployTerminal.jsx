@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 
-const DeployTerminal = () => {
+const DeployTerminal = ({ startAnimation = false }) => {
   const { t } = useLanguage();
   const lines = t.home.terminal.lines;
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
+    if (!startAnimation) return;
     setVisibleCount(0);
     let i = 0;
     const interval = setInterval(() => {
@@ -18,7 +19,7 @@ const DeployTerminal = () => {
       if (i >= lines.length) clearInterval(interval);
     }, 650);
     return () => clearInterval(interval);
-  }, [lines]);
+  }, [lines, startAnimation]);
 
   return (
     <div className="w-full max-w-[420px] rounded-xl border border-white/10 bg-[#141418] shadow-[0_20px_60px_rgba(0,0,0,0.45)] overflow-hidden">

@@ -2,68 +2,96 @@
 
 import { useState, useEffect, useRef } from "react";
 
+const BRAND = "codewithmaik";
+const PAUSE = 1400;
+
 const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
-  const fullText = greeting + " " + name;
-  const [displayed, setDisplayed] = useState("");
+  const [greetingDisplayed, setGreetingDisplayed] = useState("");
+  const [cyclePart, setCyclePart] = useState("");
   const [cursorOn, setCursorOn] = useState(true);
   const timeoutRef = useRef(null);
-  const fallbackRef = useRef(null);
+  const watchdogRef = useRef(null);
 
   useEffect(() => {
-    setDisplayed("");
-    let i = 0;
     let cancelled = false;
+    setGreetingDisplayed("");
+    setCyclePart("");
 
-    const tick = () => {
-      if (cancelled) return;
-      i++;
-      setDisplayed(fullText.slice(0, i));
-      if (i < fullText.length) {
-        timeoutRef.current = setTimeout(tick, speed);
-      }
+    const armWatchdog = (text, setter, onDone) => {
+      if (watchdogRef.current) clearTimeout(watchdogRef.current);
+      watchdogRef.current = setTimeout(() => {
+        if (cancelled) return;
+        setter(text);
+        onDone();
+      }, text.length * speed * 3 + 2000);
     };
 
-    timeoutRef.current = setTimeout(tick, speed);
+    const typeInto = (text, setter, onDone) => {
+      let i = 0;
+      armWatchdog(text, setter, onDone);
+      const step = () => {
+        if (cancelled) return;
+        i++;
+        setter(text.slice(0, i));
+        if (i < text.length) {
+          timeoutRef.current = setTimeout(step, speed);
+        } else {
+          if (watchdogRef.current) clearTimeout(watchdogRef.current);
+          onDone();
+        }
+      };
+      timeoutRef.current = setTimeout(step, speed);
+    };
 
-    // Safety net: if the animation stalls (e.g., aggressive timer throttling
-    // on some Android browsers), guarantee the full text is shown after a
-    // generous deadline so the user never sees just a partial heading.
-    const deadline = fullText.length * speed * 2 + 1500;
-    fallbackRef.current = setTimeout(() => {
-      if (!cancelled) setDisplayed(fullText);
-    }, deadline);
+    const deleteFrom = (text, setter, onDone) => {
+      let i = text.length;
+      armWatchdog("", setter, onDone);
+      const step = () => {
+        if (cancelled) return;
+        i--;
+        setter(text.slice(0, i));
+        if (i > 0) {
+          timeoutRef.current = setTimeout(step, speed);
+        } else {
+          if (watchdogRef.current) clearTimeout(watchdogRef.current);
+          onDone();
+        }
+      };
+      timeoutRef.current = setTimeout(step, speed);
+    };
+
+    const pause = (onDone) => {
+      timeoutRef.current = setTimeout(onDone, PAUSE);
+    };
+
+    const runDeleteName = () => deleteFrom(name, setCyclePart, runTypeBrand);
+    const runTypeBrand = () =>
+      typeInto(BRAND, setCyclePart, () => pause(runDeleteBrand));
+    const runDeleteBrand = () => deleteFrom(BRAND, setCyclePart, runTypeName);
+    const runTypeName = () =>
+      typeInto(name, setCyclePart, () => pause(runDeleteName));
+
+    typeInto(greeting, setGreetingDisplayed, () => {
+      typeInto(name, setCyclePart, () => pause(runDeleteName));
+    });
 
     return () => {
       cancelled = true;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      if (fallbackRef.current) clearTimeout(fallbackRef.current);
+      if (watchdogRef.current) clearTimeout(watchdogRef.current);
     };
-  }, [fullText, speed]);
-
-  useEffect(() => {
-    const onVisible = () => {
-      if (document.visibilityState === "visible" && displayed.length < fullText.length) {
-        setDisplayed(fullText);
-      }
-    };
-    document.addEventListener("visibilitychange", onVisible);
-    return () => document.removeEventListener("visibilitychange", onVisible);
-  }, [displayed, fullText]);
+  }, [greeting, name, speed]);
 
   useEffect(() => {
     const blink = setInterval(() => setCursorOn((v) => !v), 530);
     return () => clearInterval(blink);
   }, []);
 
-  const greetingPart = displayed.slice(0, Math.min(displayed.length, greeting.length));
-  const namePart =
-    displayed.length > greeting.length ? displayed.slice(greeting.length + 1) : "";
-
   return (
-    <h1 className="h1 mb-6">
-      {greetingPart}
+    <h1 className="h1 mb-6 break-words">
+      {greetingDisplayed}
       <br />
-      <span className="text-accent">{namePart}</span>
+      <span className="text-accent">{cyclePart}</span>
       <span
         className="inline-block w-[3px] h-[0.8em] bg-white ml-1 align-middle"
         style={{ opacity: cursorOn ? 1 : 0, transition: "opacity 0.1s" }}

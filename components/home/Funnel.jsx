@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/language-context";
 
 const Funnel = () => {
@@ -46,20 +44,6 @@ const Funnel = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center xl:justify-start mt-12"
-        >
-          <Link href="/contact">
-            <Button size="lg" className="uppercase">
-              {t.home.ctaBanner.button}
-            </Button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
