@@ -1,13 +1,99 @@
 "use client";
 
 import { useState, useRef, useLayoutEffect, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaFigma, FaPencilRuler, FaMobile, FaUsers } from "react-icons/fa";
 import { SiAdobexd, SiSketch } from "react-icons/si";
 import { FiChevronDown } from "react-icons/fi";
 import { useLanguage } from "@/lib/language-context";
+
+const MagneticDemo = ({ label }) => {
+  const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
+  const y = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        x.set((e.clientX - rect.left - rect.width / 2) * 0.4);
+        y.set((e.clientY - rect.top - rect.height / 2) * 0.4);
+      }}
+      onMouseLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+    >
+      <motion.div
+        style={{ x, y }}
+        className="w-16 h-16 rounded-full bg-accent text-primary flex items-center justify-center text-xs font-bold text-center px-2"
+      >
+        {label}
+      </motion.div>
+    </div>
+  );
+};
+
+const TiltDemo = () => {
+  const rotateX = useSpring(0, { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(0, { stiffness: 200, damping: 20 });
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center"
+      style={{ perspective: 600 }}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        rotateX.set(-py * 24);
+        rotateY.set(px * 24);
+      }}
+      onMouseLeave={() => {
+        rotateX.set(0);
+        rotateY.set(0);
+      }}
+    >
+      <motion.div
+        style={{ rotateX, rotateY }}
+        className="w-20 h-14 rounded-lg bg-gradient-to-br from-accent to-[#0a8fb0] shadow-[0_10px_30px_rgba(0,217,255,0.35)]"
+      />
+    </div>
+  );
+};
+
+const MorphDemo = () => (
+  <div className="w-full h-full flex items-center justify-center">
+    <motion.div
+      className="w-16 h-16 bg-accent"
+      animate={{
+        borderRadius: [
+          "30% 70% 70% 30% / 30% 30% 70% 70%",
+          "70% 30% 30% 70% / 70% 70% 30% 30%",
+          "30% 70% 70% 30% / 30% 30% 70% 70%",
+        ],
+      }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </div>
+);
+
+const SpringDemo = () => {
+  const [clicked, setClicked] = useState(false);
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <motion.button
+        onClick={() => setClicked((v) => !v)}
+        animate={{ scale: clicked ? 1.35 : 1, rotate: clicked ? 12 : 0 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 8 }}
+        className="w-16 h-16 rounded-2xl bg-accent text-primary flex items-center justify-center"
+      >
+        <FiChevronDown className="text-2xl rotate-180" />
+      </motion.button>
+    </div>
+  );
+};
 
 const toolIcons = [
   <FaFigma key="f" />,
@@ -132,6 +218,39 @@ const UIUXDesign = () => {
       </div>
     </div>
   );
+
+  const AnimationShowcasePanel = () => {
+    const demos = [MagneticDemo, TiltDemo, MorphDemo, SpringDemo];
+    return (
+      <div className="h-screen w-screen flex items-center px-10 xl:px-16">
+        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-8">
+          <div className="max-w-[600px]">
+            <h2 className="text-2xl font-bold text-white mb-2">{u.showcaseHeading}</h2>
+            <p className="text-white/60 text-sm">{u.showcaseSubtitle}</p>
+          </div>
+          <div className="grid grid-cols-4 gap-5">
+            {u.showcase.map((item, index) => {
+              const Demo = demos[index];
+              return (
+                <div
+                  key={item.title}
+                  className="bg-[#232329] rounded-xl p-4 flex flex-col gap-3 h-[220px]"
+                >
+                  <div className="flex-1">
+                    <Demo label={item.title} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-accent">{item.title}</h3>
+                    <p className="text-white/50 text-xs leading-snug">{item.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const ToolsApproachPanel = () => (
     <div className="h-screen w-screen flex items-center px-10 xl:px-16">
@@ -293,7 +412,7 @@ const UIUXDesign = () => {
             style={{ gridTemplateColumns: "100vw 100vw", gridTemplateRows: "100vh 100vh" }}
           >
             <HeroPanel />
-            <HeroPanel />
+            <AnimationShowcasePanel />
             <ToolsApproachPanel />
             <ProcessCtaPanel />
           </div>

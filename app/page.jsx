@@ -11,6 +11,7 @@ import Spectrum from "@/components/home/Spectrum";
 import Process from "@/components/home/Process";
 import Funnel from "@/components/home/Funnel";
 import CtaBanner from "@/components/home/CtaBanner";
+import ExploreMore from "@/components/home/ExploreMore";
 import { useLanguage } from "@/lib/language-context";
 
 const Home = () => {
@@ -58,6 +59,7 @@ const Home = () => {
       <Process />
       <Funnel />
       <CtaBanner />
+      <ExploreMore />
     </section>
   );
 };
