@@ -68,11 +68,7 @@ const TypewriterHeading = ({ greeting, name, speed = 90 }) => {
     };
 
     const runDeleteName = () => deleteFrom(name, setCyclePart, runTypeBrand);
-    const runTypeBrand = () =>
-      typeInto(BRAND, setCyclePart, () => pause(runDeleteBrand));
-    const runDeleteBrand = () => deleteFrom(BRAND, setCyclePart, runTypeName);
-    const runTypeName = () =>
-      typeInto(name, setCyclePart, () => pause(runDeleteName));
+    const runTypeBrand = () => typeInto(BRAND, setCyclePart, () => {});
 
     typeInto(greeting, setGreetingDisplayed, () => {
       typeInto(name, setCyclePart, () => pause(runDeleteName));

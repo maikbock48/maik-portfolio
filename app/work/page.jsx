@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/tooltip";
 
 import Link from "next/link";
-import Image from "next/image";
 import WorkSliderBtns from "@/components/WorkSliderBtns";
+import VideoFrame from "@/components/VideoFrame";
 import { useLanguage } from "@/lib/language-context";
 
 const Work = () => {
@@ -48,8 +48,12 @@ const Work = () => {
                 {project.num}
               </div>
               {/* project category */}
-              <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
-                {project.category} project
+              <span className="text-accent text-sm uppercase tracking-wide font-semibold">
+                {project.category}
+              </span>
+              {/* project title */}
+              <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">
+                {project.title}
               </h2>
               {/* project description */}
               <p className="text-white/60">{project.description}</p>
@@ -108,19 +112,11 @@ const Work = () => {
               {projects.map((project, index) => {
                 return (
                   <SwiperSlide key={index} className="w-full">
-                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                      {/* overlay */}
-                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                      {/* image */}
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={project.image}
-                          fill
-                          className="object-cover"
-                          alt=""
-                          loading="lazy"
-                        />
-                      </div>
+                    <div className="h-[460px] flex items-center justify-center">
+                      <VideoFrame
+                        caption={project.title}
+                        comingSoon={t.work.videoComingSoon}
+                      />
                     </div>
                   </SwiperSlide>
                 );

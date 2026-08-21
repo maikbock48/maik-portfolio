@@ -103,6 +103,8 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
                 {service.title}
               </SelectItem>
             ))}
+            <SelectItem value={c.serviceIndividual}>{c.serviceIndividual}</SelectItem>
+            <SelectItem value={c.serviceOther}>{c.serviceOther}</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
