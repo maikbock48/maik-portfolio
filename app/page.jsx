@@ -7,6 +7,10 @@ import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
 import TypewriterHeading from "@/components/TypewriterHeading";
+import Spectrum from "@/components/home/Spectrum";
+import Process from "@/components/home/Process";
+import Funnel from "@/components/home/Funnel";
+import CtaBanner from "@/components/home/CtaBanner";
 import { useLanguage } from "@/lib/language-context";
 
 const Home = () => {
@@ -17,7 +21,7 @@ const Home = () => {
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
-        <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
+        <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-2 xl:pb-8">
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl">{h.role}</span>
@@ -50,6 +54,10 @@ const Home = () => {
         </div>
       </div>
       <Stats />
+      <Spectrum />
+      <Process />
+      <Funnel />
+      <CtaBanner />
     </section>
   );
 };

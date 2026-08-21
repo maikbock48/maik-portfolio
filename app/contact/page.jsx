@@ -79,6 +79,17 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-[22px] px-6 sm:px-10 py-[37px] bg-[#27272c] rounded-xl">
               <h3 className="text-2xl sm:text-3xl xl:text-4xl text-accent break-words">{c.title}</h3>
               <p className="text-white/60">{c.subtitle}</p>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {t.home.funnel.steps.map((step, index) => (
+                  <span
+                    key={step.title}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.06] px-3 py-1.5 text-white/70"
+                  >
+                    <span className="text-accent font-semibold">{index + 1}</span>
+                    {step.title}
+                  </span>
+                ))}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input type="text" placeholder={c.firstname} value={formData.firstname}
                   onChange={(e) => setFormData({ ...formData, firstname: e.target.value })} required />
@@ -96,10 +107,11 @@ const Contact = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>{c.selectService}</SelectLabel>
-                    <SelectItem value="Web Development">Web Development</SelectItem>
-                    <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
-                    <SelectItem value="Logo Design">Logo Design</SelectItem>
-                    <SelectItem value="SEO">SEO</SelectItem>
+                    {t.services.map((service) => (
+                      <SelectItem key={service.href} value={service.title}>
+                        {service.title}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>

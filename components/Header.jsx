@@ -7,7 +7,7 @@ import HireMeButton from "./HireMeButton";
 
 const Header = () => {
   return (
-    <header className="py-8 xl:py-12 text-white">
+    <header className="py-5 xl:py-8 text-white">
       <div className="container mx-auto flex justify-between items-center">
         {/* logo */}
         <Link href="/">

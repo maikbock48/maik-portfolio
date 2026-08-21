@@ -30,6 +30,25 @@ const Photo = () => {
             alt=""
             className="object-cover"
           />
+          {/* subtle blur all around the edge */}
+          <div
+            className="absolute inset-0 backdrop-blur-[2px]"
+            style={{
+              maskImage:
+                "radial-gradient(circle at 50% 45%, transparent 76%, black 100%)",
+              WebkitMaskImage:
+                "radial-gradient(circle at 50% 45%, transparent 76%, black 100%)",
+            }}
+          />
+          {/* stronger blur fading in toward the bottom edge */}
+          <div
+            className="absolute inset-0 backdrop-blur-lg"
+            style={{
+              maskImage: "linear-gradient(to bottom, transparent 58%, black 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 58%, black 100%)",
+            }}
+          />
         </motion.div>
 
         {/* circle */}
