@@ -16,9 +16,34 @@ const Footer = () => {
     { label: t.nav.contact, href: "/contact" },
   ];
 
+  const resources = [
+    { label: "MDN Web Docs", href: "https://developer.mozilla.org" },
+    { label: "Stack Overflow", href: "https://stackoverflow.com" },
+    { label: "Dev.to", href: "https://dev.to" },
+    { label: "Hacker News", href: "https://news.ycombinator.com" },
+    { label: "W3Schools", href: "https://www.w3schools.com" },
+  ];
+
   return (
     <footer className="mt-12 border-t border-white/10 bg-primary/40 backdrop-blur-sm">
       <div className="container mx-auto py-8 px-4">
+        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 mb-6 pb-6 border-b border-white/10 text-xs sm:text-sm">
+          <span className="text-white/40 uppercase tracking-wide">{f.resources}</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            {resources.map((r) => (
+              <a
+                key={r.href}
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-accent transition-colors"
+              >
+                {r.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6 pb-6 border-b border-white/10">
           <div className="flex items-center gap-2">
             <span className="text-accent font-semibold text-lg">Maik<span className="text-white">.</span></span>

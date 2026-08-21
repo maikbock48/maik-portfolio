@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react";
 
 const BRAND = "codewithmaik";
 const PAUSE = 1400;
+const SPACE_PAUSE = 220;
 
-const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
+const TypewriterHeading = ({ greeting, name, speed = 90 }) => {
   const [greetingDisplayed, setGreetingDisplayed] = useState("");
   const [cyclePart, setCyclePart] = useState("");
   const [cursorOn, setCursorOn] = useState(true);
@@ -26,6 +27,8 @@ const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
       }, text.length * speed * 3 + 2000);
     };
 
+    const delayFor = (char) => (char === " " ? speed + SPACE_PAUSE : speed);
+
     const typeInto = (text, setter, onDone) => {
       let i = 0;
       armWatchdog(text, setter, onDone);
@@ -34,7 +37,7 @@ const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
         i++;
         setter(text.slice(0, i));
         if (i < text.length) {
-          timeoutRef.current = setTimeout(step, speed);
+          timeoutRef.current = setTimeout(step, delayFor(text[i - 1]));
         } else {
           if (watchdogRef.current) clearTimeout(watchdogRef.current);
           onDone();
@@ -51,7 +54,7 @@ const TypewriterHeading = ({ greeting, name, speed = 75 }) => {
         i--;
         setter(text.slice(0, i));
         if (i > 0) {
-          timeoutRef.current = setTimeout(step, speed);
+          timeoutRef.current = setTimeout(step, delayFor(text[i]));
         } else {
           if (watchdogRef.current) clearTimeout(watchdogRef.current);
           onDone();

@@ -17,7 +17,7 @@ const DeployTerminal = ({ startAnimation = false }) => {
       i += 1;
       setVisibleCount(i);
       if (i >= lines.length) clearInterval(interval);
-    }, 650);
+    }, 585);
     return () => clearInterval(interval);
   }, [lines, startAnimation]);
 
