@@ -20,15 +20,15 @@ const Photo = () => {
             opacity: 1,
             transition: { delay: 0.9, duration: 0.7, ease: "easeInOut" },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.864] xl:scale-[0.765]"
+          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.968] xl:scale-[0.857]"
         >
           <Image
-            src="/assets/maik.png"
+            src="/assets/profile.jpg"
             priority
             quality={80}
             fill
             alt=""
-            className="object-cover"
+            className="object-cover object-top"
           />
           {/* subtle blur all around the edge */}
           <div

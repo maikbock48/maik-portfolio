@@ -2,12 +2,21 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
+import { FiArrowRight, FiX, FiChevronUp } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import Link from "next/link";
 import ParticleBackground from "@/components/home/ParticleBackground";
 import { useLanguage } from "@/lib/language-context";
 
 const WHATSAPP_HREF = "https://wa.me/491626310090";
+
+const navPaths = [
+  { key: "home", path: "/" },
+  { key: "services", path: "/services" },
+  { key: "resume", path: "/resume" },
+  { key: "work", path: "/work" },
+  { key: "contact", path: "/contact" },
+];
 
 const ExploreMore = () => {
   const { t } = useLanguage();
@@ -49,7 +58,7 @@ const ExploreMore = () => {
       if (isAnimatingRef.current) return;
       isAnimatingRef.current = true;
       gsap.to(gridEl, {
-        y: target === "up" ? "-100vh" : "0vh",
+        y: target === "bridge" ? -window.innerHeight : 0,
         duration: 0.9,
         ease: "power2.inOut",
         onComplete: () => {
@@ -67,6 +76,7 @@ const ExploreMore = () => {
       const { Observer } = await import("gsap/Observer");
       if (cancelled) return;
       gsap.registerPlugin(Observer);
+      gsap.set(gridEl, { yPercent: 0, y: -window.innerHeight });
       document.documentElement.style.overflow = "hidden";
 
       observer = Observer.create({
@@ -75,10 +85,10 @@ const ExploreMore = () => {
         wheelSpeed: 1,
         tolerance: 10,
         preventDefault: true,
-        onDown: () => {
+        onUp: () => {
           if (panelRef.current === "bridge") goTo(gsap, "up");
         },
-        onUp: () => {
+        onDown: () => {
           if (panelRef.current === "up") {
             goTo(gsap, "bridge");
           } else if (!isAnimatingRef.current) {
@@ -104,11 +114,11 @@ const ExploreMore = () => {
       <AnimatePresence>
         {atBottom && !open && (
           <motion.button
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 10, scale: 1.05 }}
+            animate={{ opacity: 1, y: 0, scale: 1.05 }}
+            exit={{ opacity: 0, y: 10, scale: 1.05 }}
             onClick={() => setOpen(true)}
-            className="fixed bottom-24 right-6 xl:bottom-28 xl:right-[29px] z-40 flex items-center gap-2 rounded-full border border-accent/30 bg-[#1c1c22] px-4 py-2.5 text-sm text-white/80 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:border-accent hover:text-accent transition-colors"
+            className="fixed bottom-80 right-6 xl:bottom-72 xl:right-[29px] z-40 flex items-center gap-2 rounded-full border border-accent/30 bg-[#1c1c22] px-4 py-2.5 text-sm text-white/80 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:border-accent hover:text-accent transition-colors"
           >
             {e.hint}
             <FiArrowRight className="text-accent" />
@@ -145,24 +155,8 @@ const ExploreMore = () => {
               ))}
             </div>
 
-            <div ref={gridRef} className="relative" style={{ height: "200vh" }}>
-              {/* bridge panel */}
-              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
-                <ParticleBackground count={45} className="opacity-70" />
-                <h2 className="relative z-10 text-3xl sm:text-4xl font-bold text-white max-w-[600px]">
-                  {e.bridgeTitle}
-                </h2>
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative z-10 flex flex-col items-center gap-1 text-accent"
-                >
-                  <FiChevronDown className="text-2xl" />
-                  <span className="text-white/40 text-sm">{e.bridgeHint}</span>
-                </motion.div>
-              </div>
-
-              {/* "the only way is up" panel */}
+            <div ref={gridRef} className="relative" style={{ height: "200vh", transform: "translateY(-100vh)" }}>
+              {/* "the only way is up" panel — sits above the bridge panel; reached by scrolling up */}
               <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
                 <h2 className="relative z-10 h2">{e.title}</h2>
@@ -183,6 +177,48 @@ const ExploreMore = () => {
                   <FaWhatsapp className="text-xl" />
                   {e.whatsappButton}
                 </a>
+
+                <nav className="absolute bottom-10 md:bottom-14 left-0 right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+                  {navPaths.map((link, index) => (
+                    <motion.div
+                      key={link.key}
+                      initial={{ opacity: 0, y: -60 }}
+                      animate={
+                        panel === "up"
+                          ? { opacity: 1, y: 0, scale: [1, 1.18, 1] }
+                          : { opacity: 0, y: -60 }
+                      }
+                      transition={{
+                        opacity: { delay: index * 0.12, duration: 0.5, ease: "easeOut" },
+                        y: { delay: index * 0.12, duration: 0.5, ease: "easeOut" },
+                        scale: { delay: index * 0.12 + 0.5, duration: 0.45, ease: "easeInOut" },
+                      }}
+                    >
+                      <Link
+                        href={link.path}
+                        className="capitalize font-medium text-white/70 hover:text-accent transition-colors"
+                      >
+                        {t.nav[link.key]}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+              </div>
+
+              {/* bridge panel */}
+              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
+                <ParticleBackground count={45} className="opacity-70" />
+                <h2 className="relative z-10 text-3xl sm:text-4xl font-bold text-white max-w-[600px]">
+                  {e.bridgeTitle}
+                </h2>
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10 flex flex-col items-center gap-1 text-accent"
+                >
+                  <FiChevronUp className="text-2xl" />
+                  <span className="text-white/40 text-sm">{e.bridgeHint}</span>
+                </motion.div>
               </div>
             </div>
           </motion.div>
