@@ -33,25 +33,25 @@ const Photo = () => {
           />
           {/* narrow but intense blur right at the border, leaving the center of the photo sharp */}
           <div
-            className="absolute inset-0 backdrop-blur-[80px]"
+            className="absolute inset-0 backdrop-blur-[95px]"
             style={{
-              maskImage: "radial-gradient(circle at 50% 50%, transparent 65%, black 95%)",
+              maskImage: "radial-gradient(circle at 50% 50%, transparent 60%, black 95%)",
               WebkitMaskImage:
-                "radial-gradient(circle at 50% 50%, transparent 65%, black 95%)",
+                "radial-gradient(circle at 50% 50%, transparent 60%, black 95%)",
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 50% 50%, transparent 68%, #1c1c22 92%)",
+                "radial-gradient(circle at 50% 50%, transparent 63%, #1c1c22 92%)",
             }}
           />
         </motion.div>
 
         {/* circle — centered on the photo, sized to sit flush against its edge */}
         <motion.svg
-          className="absolute w-[257px] h-[257px] xl:w-[381px] xl:h-[381px] top-[149px] left-[159px] xl:top-[249px] xl:left-[259px] -translate-x-1/2 -translate-y-1/2"
+          className="absolute w-[260px] h-[260px] xl:w-[385px] xl:h-[385px] top-[149px] left-[159px] xl:top-[249px] xl:left-[259px] -translate-x-1/2 -translate-y-1/2"
           fill="transparent"
           viewBox="0 0 506 506"
           xmlns="http://www.w3.org/2000/svg"
