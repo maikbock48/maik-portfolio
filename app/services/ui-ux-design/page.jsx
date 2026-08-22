@@ -1,20 +1,22 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
-import { motion, useSpring } from "framer-motion";
+import { useState, useRef, useMemo, useLayoutEffect, useEffect } from "react";
+import { motion, useSpring, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaFigma, FaPencilRuler, FaMobile, FaUsers } from "react-icons/fa";
 import { SiAdobexd, SiSketch } from "react-icons/si";
 import { FiChevronDown } from "react-icons/fi";
 import { useLanguage } from "@/lib/language-context";
+import { playClick, playPop, playDing, playBoing, playSwoosh, playTick } from "@/lib/sound";
 
 const MagneticDemo = ({ label }) => {
   const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
   const y = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
+  const scale = useSpring(1, { stiffness: 300, damping: 10 });
   return (
     <div
-      className="w-full h-full flex items-center justify-center"
+      className="w-full h-full flex items-center justify-center cursor-pointer"
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         x.set((e.clientX - rect.left - rect.width / 2) * 0.4);
@@ -24,10 +26,15 @@ const MagneticDemo = ({ label }) => {
         x.set(0);
         y.set(0);
       }}
+      onClick={() => {
+        playClick();
+        scale.set(1.3);
+        setTimeout(() => scale.set(1), 180);
+      }}
     >
       <motion.div
-        style={{ x, y }}
-        className="w-16 h-16 rounded-full bg-accent text-primary flex items-center justify-center text-xs font-bold text-center px-2"
+        style={{ x, y, scale }}
+        className="w-12 h-12 rounded-full bg-accent text-primary flex items-center justify-center text-[9px] font-bold text-center px-1"
       >
         {label}
       </motion.div>
@@ -35,62 +42,218 @@ const MagneticDemo = ({ label }) => {
   );
 };
 
-const TiltDemo = () => {
-  const rotateX = useSpring(0, { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(0, { stiffness: 200, damping: 20 });
+const CubeDemo = () => {
+  const [turns, setTurns] = useState(0);
+  const half = 26;
+  const faces = [
+    { t: `rotateY(0deg) translateZ(${half}px)` },
+    { t: `rotateY(180deg) translateZ(${half}px)` },
+    { t: `rotateY(90deg) translateZ(${half}px)` },
+    { t: `rotateY(-90deg) translateZ(${half}px)` },
+    { t: `rotateX(90deg) translateZ(${half}px)` },
+    { t: `rotateX(-90deg) translateZ(${half}px)` },
+  ];
   return (
     <div
-      className="w-full h-full flex items-center justify-center"
-      style={{ perspective: 600 }}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        rotateX.set(-py * 24);
-        rotateY.set(px * 24);
-      }}
-      onMouseLeave={() => {
-        rotateX.set(0);
-        rotateY.set(0);
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      style={{ perspective: 400 }}
+      onClick={() => {
+        playClick();
+        setTurns((t) => t + 1);
       }}
     >
       <motion.div
-        style={{ rotateX, rotateY }}
-        className="w-20 h-14 rounded-lg bg-gradient-to-br from-accent to-[#0a8fb0] shadow-[0_10px_30px_rgba(0,217,255,0.35)]"
-      />
+        animate={{ rotateY: turns * 90, rotateX: turns * 33 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        style={{ transformStyle: "preserve-3d", width: half * 2, height: half * 2, position: "relative" }}
+      >
+        {faces.map((f, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 bg-accent/80 border border-accent flex items-center justify-center text-primary text-[10px] font-bold"
+            style={{ transform: f.t }}
+          >
+            {i + 1}
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 };
 
-const MorphDemo = () => (
-  <div className="w-full h-full flex items-center justify-center">
-    <motion.div
-      className="w-16 h-16 bg-accent"
-      animate={{
-        borderRadius: [
-          "30% 70% 70% 30% / 30% 30% 70% 70%",
-          "70% 30% 30% 70% / 70% 70% 30% 30%",
-          "30% 70% 70% 30% / 30% 30% 70% 70%",
-        ],
+const MorphDemo = () => {
+  const scale = useSpring(1, { stiffness: 300, damping: 10 });
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playPop();
+        scale.set(1.4);
+        setTimeout(() => scale.set(1), 200);
       }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    />
-  </div>
-);
+    >
+      <motion.div style={{ scale }}>
+        <motion.div
+          className="w-12 h-12 bg-accent"
+          animate={{
+            borderRadius: [
+              "30% 70% 70% 30% / 30% 30% 70% 70%",
+              "70% 30% 30% 70% / 70% 70% 30% 30%",
+              "30% 70% 70% 30% / 30% 30% 70% 70%",
+            ],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </motion.div>
+    </div>
+  );
+};
 
 const SpringDemo = () => {
   const [clicked, setClicked] = useState(false);
   return (
     <div className="w-full h-full flex items-center justify-center">
       <motion.button
-        onClick={() => setClicked((v) => !v)}
+        onClick={() => {
+          setClicked((v) => !v);
+          playBoing();
+        }}
         animate={{ scale: clicked ? 1.35 : 1, rotate: clicked ? 12 : 0 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 8 }}
-        className="w-16 h-16 rounded-2xl bg-accent text-primary flex items-center justify-center"
+        className="w-12 h-12 rounded-2xl bg-accent text-primary flex items-center justify-center"
       >
-        <FiChevronDown className="text-2xl rotate-180" />
+        <FiChevronDown className="text-lg rotate-180" />
       </motion.button>
+    </div>
+  );
+};
+
+const LoadingRingDemo = () => {
+  const [key, setKey] = useState(0);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playTick();
+        setKey((k) => k + 1);
+      }}
+    >
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="4" />
+        <motion.circle
+          key={key}
+          cx="24"
+          cy="24"
+          r="20"
+          fill="none"
+          stroke="#00d9ff"
+          strokeWidth="4"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.1, ease: "easeInOut" }}
+          onAnimationComplete={playDing}
+          transform="rotate(-90 24 24)"
+        />
+      </svg>
+    </div>
+  );
+};
+
+const ParticleBurstDemo = () => {
+  const [burstId, setBurstId] = useState(0);
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 12 }, (_, i) => {
+        const angle = (i / 12) * Math.PI * 2;
+        return { dx: Math.cos(angle) * 34, dy: Math.sin(angle) * 34 };
+      }),
+    []
+  );
+  return (
+    <div
+      className="relative w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playPop();
+        setBurstId((id) => id + 1);
+      }}
+    >
+      <div className="w-3 h-3 rounded-full bg-accent" />
+      <AnimatePresence>
+        {burstId > 0 &&
+          particles.map((p, i) => (
+            <motion.span
+              key={`${burstId}-${i}`}
+              className="absolute w-1.5 h-1.5 rounded-full bg-accent"
+              initial={{ x: 0, y: 0, opacity: 1 }}
+              animate={{ x: p.dx, y: p.dy, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          ))}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const FlipRevealDemo = () => {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      style={{ perspective: 400 }}
+      onClick={() => {
+        playClick();
+        setFlipped((f) => !f);
+      }}
+    >
+      <motion.div
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        style={{ transformStyle: "preserve-3d", width: 48, height: 48, position: "relative" }}
+      >
+        <div
+          className="absolute inset-0 rounded-lg bg-accent flex items-center justify-center text-primary text-lg"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <FiChevronDown className="rotate-180" />
+        </div>
+        <div
+          className="absolute inset-0 rounded-lg bg-[#141418] border border-accent flex items-center justify-center text-accent text-lg"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          ✓
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+const RippleWaveDemo = () => {
+  const [rippleId, setRippleId] = useState(0);
+  return (
+    <div
+      className="relative w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playSwoosh();
+        setRippleId((id) => id + 1);
+      }}
+    >
+      <div className="w-2.5 h-2.5 rounded-full bg-accent z-10" />
+      <AnimatePresence>
+        {rippleId > 0 &&
+          [0, 1, 2].map((i) => (
+            <motion.span
+              key={`${rippleId}-${i}`}
+              className="absolute rounded-full border-2 border-accent"
+              initial={{ width: 10, height: 10, opacity: 0.6 }}
+              animate={{ width: 76, height: 76, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1, delay: i * 0.15, ease: "easeOut" }}
+            />
+          ))}
+      </AnimatePresence>
     </div>
   );
 };
@@ -220,28 +383,37 @@ const UIUXDesign = () => {
   );
 
   const AnimationShowcasePanel = () => {
-    const demos = [MagneticDemo, TiltDemo, MorphDemo, SpringDemo];
+    const demos = [
+      MagneticDemo,
+      CubeDemo,
+      MorphDemo,
+      SpringDemo,
+      LoadingRingDemo,
+      ParticleBurstDemo,
+      FlipRevealDemo,
+      RippleWaveDemo,
+    ];
     return (
-      <div className="h-screen w-screen flex items-center px-10 xl:px-16">
-        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-8">
+      <div className="h-screen w-screen flex items-center px-8 xl:px-12">
+        <div className="w-full max-w-[1700px] mx-auto flex flex-col gap-6">
           <div className="max-w-[600px]">
             <h2 className="text-2xl font-bold text-white mb-2">{u.showcaseHeading}</h2>
             <p className="text-white/60 text-sm">{u.showcaseSubtitle}</p>
           </div>
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-8 gap-3">
             {u.showcase.map((item, index) => {
               const Demo = demos[index];
               return (
                 <div
                   key={item.title}
-                  className="bg-[#232329] rounded-xl p-4 flex flex-col gap-3 h-[220px]"
+                  className="bg-[#232329] rounded-xl p-3 flex flex-col gap-2 h-[180px]"
                 >
-                  <div className="flex-1">
+                  <div className="flex-1 min-h-0">
                     <Demo label={item.title} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-accent">{item.title}</h3>
-                    <p className="text-white/50 text-xs leading-snug">{item.desc}</p>
+                    <h3 className="text-xs font-bold text-accent leading-tight">{item.title}</h3>
+                    <p className="text-white/50 text-[10px] leading-snug mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               );

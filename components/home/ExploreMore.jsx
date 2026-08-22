@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiArrowRight, FiX, FiChevronUp } from "react-icons/fi";
+import { FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import ParticleBackground from "@/components/home/ParticleBackground";
 import { useLanguage } from "@/lib/language-context";
 
 const WHATSAPP_HREF = "https://wa.me/491626310090";
@@ -146,36 +147,38 @@ const ExploreMore = () => {
 
             <div ref={gridRef} className="relative" style={{ height: "200vh" }}>
               {/* bridge panel */}
-              <div className="h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white max-w-[600px]">
+              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
+                <ParticleBackground count={45} className="opacity-70" />
+                <h2 className="relative z-10 text-3xl sm:text-4xl font-bold text-white max-w-[600px]">
                   {e.bridgeTitle}
                 </h2>
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex flex-col items-center gap-1 text-accent"
+                  className="relative z-10 flex flex-col items-center gap-1 text-accent"
                 >
-                  <FiChevronUp className="text-2xl" />
+                  <FiChevronDown className="text-2xl" />
                   <span className="text-white/40 text-sm">{e.bridgeHint}</span>
                 </motion.div>
               </div>
 
               {/* "the only way is up" panel */}
-              <div className="h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6">
-                <h2 className="h2">{e.title}</h2>
-                <ul className="flex flex-col gap-3 max-w-[560px]">
+              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
+                <ParticleBackground count={70} className="opacity-90" />
+                <h2 className="relative z-10 h2">{e.title}</h2>
+                <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
                   {e.points.map((point) => (
                     <li key={point} className="text-white/70 text-sm sm:text-base">
                       {point}
                     </li>
                   ))}
                 </ul>
-                <p className="text-white/60 text-sm max-w-[420px] mt-2">{e.whatsappText}</p>
+                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-2">{e.whatsappText}</p>
                 <a
                   href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-accent text-primary font-semibold px-6 py-3 hover:bg-accent-hover transition-all"
+                  className="relative z-10 inline-flex items-center gap-2 rounded-full bg-accent text-primary font-semibold px-6 py-3 hover:bg-accent-hover transition-all"
                 >
                   <FaWhatsapp className="text-xl" />
                   {e.whatsappButton}

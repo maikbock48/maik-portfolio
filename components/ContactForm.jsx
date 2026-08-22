@@ -58,8 +58,8 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex flex-col ${compact ? "gap-4" : "gap-[22px]"} ${
-        compact ? "px-5 py-6 sm:px-7 sm:py-7" : "px-6 sm:px-10 py-[37px]"
+      className={`flex flex-col gap-4 ${
+        compact ? "px-5 py-6 sm:px-7 sm:py-7" : "px-6 sm:px-10 py-7"
       } bg-[#27272c] rounded-xl`}
     >
       {!compact && (
@@ -108,7 +108,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Textarea className={compact ? "h-[110px]" : "h-[180px]"} placeholder={c.message} value={formData.message}
+      <Textarea className="h-[110px]" placeholder={c.message} value={formData.message}
         onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
       {submitStatus === "success" && <p className="text-green-500 text-sm">{c.success}</p>}
       {submitStatus === "error" && <p className="text-red-500 text-sm">{c.error}</p>}
