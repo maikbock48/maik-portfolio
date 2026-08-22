@@ -21,7 +21,7 @@ const Photo = () => {
             transition: { delay: 0.9, duration: 0.7, ease: "easeInOut" },
           }}
           className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.864] xl:scale-[0.765]"
-          style={{ boxShadow: "0 0 45px 25px #1c1c22" }}
+          style={{ boxShadow: "0 0 65px 40px #1c1c22" }}
         >
           <Image
             src="/assets/profile.jpg"
@@ -29,22 +29,22 @@ const Photo = () => {
             quality={80}
             fill
             alt=""
-            className="object-cover object-center"
+            className="object-cover object-[50%_30%]"
           />
           {/* wide, strong blur across the border, melting the photo into the page background */}
           <div
-            className="absolute inset-0 backdrop-blur-xl"
+            className="absolute inset-0 backdrop-blur-3xl"
             style={{
-              maskImage: "radial-gradient(circle at 50% 50%, transparent 50%, black 95%)",
+              maskImage: "radial-gradient(circle at 50% 50%, transparent 38%, black 92%)",
               WebkitMaskImage:
-                "radial-gradient(circle at 50% 50%, transparent 50%, black 95%)",
+                "radial-gradient(circle at 50% 50%, transparent 38%, black 92%)",
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 50% 50%, transparent 55%, #1c1c22 90%)",
+                "radial-gradient(circle at 50% 50%, transparent 42%, #1c1c22 85%)",
             }}
           />
         </motion.div>
