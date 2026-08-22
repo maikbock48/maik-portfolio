@@ -16,7 +16,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="py-5 xl:py-8 text-white">
+    <header className="py-5 xl:py-10 text-white">
       <div className="container mx-auto flex justify-between items-center">
         {/* logo */}
         <Link

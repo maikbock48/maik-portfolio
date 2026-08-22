@@ -51,7 +51,7 @@ const Photo = () => {
 
         {/* circle — centered on the photo, sized to sit flush against its edge */}
         <motion.svg
-          className="absolute w-[260px] h-[260px] xl:w-[385px] xl:h-[385px] top-[149px] left-[159px] xl:top-[249px] xl:left-[259px] -translate-x-1/2 -translate-y-1/2"
+          className="absolute w-[265px] h-[265px] xl:w-[389px] xl:h-[389px] top-[149px] left-[159px] xl:top-[249px] xl:left-[259px] -translate-x-1/2 -translate-y-1/2"
           fill="transparent"
           viewBox="0 0 506 506"
           xmlns="http://www.w3.org/2000/svg"

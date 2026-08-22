@@ -20,7 +20,7 @@ const Spectrum = () => {
           <span className="text-accent text-xs tracking-[0.16em] uppercase font-semibold pl-3 border-l-2 border-accent">
             {s.eyebrow}
           </span>
-          <h2 className="h2 mt-4 mb-4">{s.title}</h2>
+          <h2 className="h2 mt-4 mb-4 xl:whitespace-nowrap">{s.title}</h2>
           <p className="text-white/60 text-[15.5px] leading-relaxed">{s.subtitle}</p>
         </motion.div>
 
