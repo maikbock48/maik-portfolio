@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiArrowRight, FiX, FiChevronUp } from "react-icons/fi";
+import { FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import ParticleBackground from "@/components/home/ParticleBackground";
@@ -85,10 +85,10 @@ const ExploreMore = () => {
         wheelSpeed: 1,
         tolerance: 10,
         preventDefault: true,
-        onUp: () => {
+        onDown: () => {
           if (panelRef.current === "bridge") goTo(gsap, "up");
         },
-        onDown: () => {
+        onUp: () => {
           if (panelRef.current === "up") {
             goTo(gsap, "bridge");
           } else if (!isAnimatingRef.current) {
@@ -156,7 +156,7 @@ const ExploreMore = () => {
             </div>
 
             <div ref={gridRef} className="relative" style={{ height: "200vh", transform: "translateY(-100vh)" }}>
-              {/* "the only way is up" panel — sits above the bridge panel; reached by scrolling up */}
+              {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
               <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
                 <h2 className="relative z-10 h2">{e.title}</h2>
@@ -212,11 +212,11 @@ const ExploreMore = () => {
                   {e.bridgeTitle}
                 </h2>
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
+                  animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                   className="relative z-10 flex flex-col items-center gap-1 text-accent"
                 >
-                  <FiChevronUp className="text-2xl" />
+                  <FiChevronDown className="text-2xl" />
                   <span className="text-white/40 text-sm">{e.bridgeHint}</span>
                 </motion.div>
               </div>

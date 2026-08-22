@@ -20,33 +20,30 @@ const Photo = () => {
             opacity: 1,
             transition: { delay: 0.9, duration: 0.7, ease: "easeInOut" },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.968] xl:scale-[0.857]"
+          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] absolute left-[10px] rounded-full overflow-hidden scale-[0.864] xl:scale-[0.765]"
         >
           <Image
-            src="/assets/profile.jpg"
+            src="/assets/profile_2.jpg"
             priority
             quality={80}
             fill
             alt=""
             className="object-cover object-top"
           />
-          {/* subtle blur all around the edge */}
+          {/* uniform blur all around the border, fading into the page background color */}
           <div
-            className="absolute inset-0 backdrop-blur-[2px]"
+            className="absolute inset-0 backdrop-blur-md"
             style={{
-              maskImage:
-                "radial-gradient(circle at 50% 45%, transparent 76%, black 100%)",
+              maskImage: "radial-gradient(circle at 50% 50%, transparent 82%, black 100%)",
               WebkitMaskImage:
-                "radial-gradient(circle at 50% 45%, transparent 76%, black 100%)",
+                "radial-gradient(circle at 50% 50%, transparent 82%, black 100%)",
             }}
           />
-          {/* stronger blur fading in toward the bottom edge */}
           <div
-            className="absolute inset-0 backdrop-blur-lg"
+            className="absolute inset-0"
             style={{
-              maskImage: "linear-gradient(to bottom, transparent 58%, black 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to bottom, transparent 58%, black 100%)",
+              background:
+                "radial-gradient(circle at 50% 50%, transparent 86%, #1c1c22 100%)",
             }}
           />
         </motion.div>

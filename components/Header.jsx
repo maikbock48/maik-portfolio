@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import Nav from "./Nav";
@@ -11,12 +12,19 @@ import HireMeButton from "./HireMeButton";
 
 const Header = () => {
   const [rotation, setRotation] = useState(0);
+  const [shakeKey, setShakeKey] = useState(0);
+  const pathname = usePathname();
 
   return (
     <header className="py-5 xl:py-8 text-white">
       <div className="container mx-auto flex justify-between items-center">
         {/* logo */}
-        <Link href="/">
+        <Link
+          href="/"
+          onClick={() => {
+            if (pathname === "/") setShakeKey((k) => k + 1);
+          }}
+        >
           <h1
             className="relative inline-block text-4xl font-semibold"
             onMouseEnter={() => setRotation((r) => r + 360)}
@@ -37,7 +45,7 @@ const Header = () => {
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
           <LanguageSwitcher />
-          <HireMeButton />
+          <HireMeButton shakeKey={shakeKey} />
         </div>
 
         {/* mobile nav */}
