@@ -42,7 +42,7 @@ const skillList = [
 
 const experienceItems = [
   { company: "Freelance", position: "Full Stack & AI Engineer", duration: "2025 - Present" },
-  { company: "Schmidt + Clemens GmbH", position: "Senior Full Stack Developer", duration: "2023 - 2025" },
+  { company: "Freelancer", position: "Senior Full Stack Developer", duration: "2023 - 2025" },
   { company: "Self-employed", position: "Junior Full Stack Developer", duration: "2019 - 2023" },
 ];
 

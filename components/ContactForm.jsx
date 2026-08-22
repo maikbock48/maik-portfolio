@@ -112,7 +112,12 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
         onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
       {submitStatus === "success" && <p className="text-green-500 text-sm">{c.success}</p>}
       {submitStatus === "error" && <p className="text-red-500 text-sm">{c.error}</p>}
-      <Button size="md" className="max-w-40" type="submit" disabled={isSubmitting}>
+      <Button
+        size="md"
+        className={`max-w-40 ${compact ? "mx-auto" : ""}`}
+        type="submit"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? c.sending : c.send}
       </Button>
     </form>
