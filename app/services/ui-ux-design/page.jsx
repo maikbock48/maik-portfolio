@@ -9,6 +9,7 @@ import { SiAdobexd, SiSketch } from "react-icons/si";
 import { FiChevronDown } from "react-icons/fi";
 import { useLanguage } from "@/lib/language-context";
 import { playClick, playPop, playDing, playBoing, playSwoosh, playTick } from "@/lib/sound";
+import ParticleBackground from "@/components/home/ParticleBackground";
 
 const MagneticDemo = () => {
   const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
@@ -256,6 +257,206 @@ const RippleWaveDemo = () => {
   );
 };
 
+const GlowPulseDemo = () => {
+  const [pulseId, setPulseId] = useState(0);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playDing();
+        setPulseId((id) => id + 1);
+      }}
+    >
+      <motion.div
+        key={pulseId}
+        className="w-12 h-12 rounded-full bg-accent"
+        animate={{
+          boxShadow: [
+            "0 0 0px 0px rgba(0,217,255,0.6)",
+            "0 0 24px 10px rgba(0,217,255,0)",
+          ],
+        }}
+        transition={{ duration: 1.1, repeat: pulseId === 0 ? Infinity : 0, ease: "easeOut" }}
+      />
+    </div>
+  );
+};
+
+const ShimmerDemo = () => {
+  const [key, setKey] = useState(0);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playTick();
+        setKey((k) => k + 1);
+      }}
+    >
+      <div className="relative w-16 h-4 rounded-full bg-white/10 overflow-hidden">
+        <motion.div
+          key={key}
+          className="absolute inset-y-0 w-6 bg-gradient-to-r from-transparent via-accent/80 to-transparent"
+          initial={{ x: -24 }}
+          animate={{ x: 64 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        />
+      </div>
+    </div>
+  );
+};
+
+const DragSnapDemo = () => {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <motion.div
+        className="w-10 h-10 rounded-full bg-accent cursor-grab active:cursor-grabbing"
+        drag
+        dragConstraints={{ top: -24, bottom: 24, left: -24, right: 24 }}
+        dragElastic={0.6}
+        whileDrag={{ scale: 1.15 }}
+        onDragStart={playPop}
+        dragTransition={{ bounceStiffness: 400, bounceDamping: 12 }}
+      />
+    </div>
+  );
+};
+
+const ConfettiPopDemo = () => {
+  const [burstId, setBurstId] = useState(0);
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 10 }, (_, i) => {
+        const angle = (i / 10) * Math.PI * 2 + Math.random() * 0.4;
+        return {
+          dx: Math.cos(angle) * (26 + Math.random() * 14),
+          dy: Math.sin(angle) * (26 + Math.random() * 14),
+          rotate: Math.random() * 360,
+        };
+      }),
+    []
+  );
+  return (
+    <div
+      className="relative w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playBoing();
+        setBurstId((id) => id + 1);
+      }}
+    >
+      <div className="w-3 h-3 rounded-sm bg-accent" />
+      <AnimatePresence>
+        {burstId > 0 &&
+          pieces.map((p, i) => (
+            <motion.span
+              key={`${burstId}-${i}`}
+              className="absolute w-1.5 h-2.5 bg-accent"
+              initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+              animate={{ x: p.dx, y: p.dy, rotate: p.rotate, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            />
+          ))}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const ToggleSwitchDemo = () => {
+  const [on, setOn] = useState(false);
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <button
+        type="button"
+        onClick={() => {
+          playClick();
+          setOn((v) => !v);
+        }}
+        className={`relative w-14 h-7 rounded-full transition-colors ${on ? "bg-accent" : "bg-white/15"}`}
+      >
+        <motion.span
+          className="absolute top-1 left-1 w-5 h-5 rounded-full bg-white"
+          animate={{ x: on ? 28 : 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        />
+      </button>
+    </div>
+  );
+};
+
+const ProgressFillDemo = () => {
+  const [key, setKey] = useState(0);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playSwoosh();
+        setKey((k) => k + 1);
+      }}
+    >
+      <div className="w-16 h-2.5 rounded-full bg-white/10 overflow-hidden">
+        <motion.div
+          key={key}
+          className="h-full bg-accent rounded-full"
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        />
+      </div>
+    </div>
+  );
+};
+
+const TiltCardDemo = () => {
+  const rotateX = useSpring(0, { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(0, { stiffness: 200, damping: 20 });
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      style={{ perspective: 400 }}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        rotateY.set(px * 40);
+        rotateX.set(py * -40);
+      }}
+      onMouseLeave={() => {
+        rotateX.set(0);
+        rotateY.set(0);
+      }}
+      onClick={playTick}
+    >
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="w-12 h-9 rounded-lg bg-accent"
+      />
+    </div>
+  );
+};
+
+const BlinkCursorDemo = () => {
+  const [typed, setTyped] = useState(0);
+  const word = "hi!";
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playTick();
+        setTyped((t) => (t >= word.length ? 0 : t + 1));
+      }}
+    >
+      <div className="font-mono text-lg text-accent font-bold flex items-center">
+        {word.slice(0, typed)}
+        <motion.span
+          className="inline-block w-[2px] h-[1em] bg-accent ml-0.5"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const toolIcons = [
   <FaFigma key="f" />,
   <SiAdobexd key="x" />,
@@ -390,10 +591,19 @@ const UIUXDesign = () => {
       ParticleBurstDemo,
       FlipRevealDemo,
       RippleWaveDemo,
+      GlowPulseDemo,
+      ShimmerDemo,
+      DragSnapDemo,
+      ConfettiPopDemo,
+      ToggleSwitchDemo,
+      ProgressFillDemo,
+      TiltCardDemo,
+      BlinkCursorDemo,
     ];
     return (
-      <div className="h-screen w-screen flex items-center px-8 xl:px-12">
-        <div className="w-full max-w-[1700px] mx-auto flex flex-col gap-6">
+      <div className="relative h-screen w-screen flex items-center px-8 xl:px-12 overflow-hidden">
+        <ParticleBackground count={70} className="opacity-90" />
+        <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col gap-4">
           <div className="max-w-[600px]">
             <h2 className="text-2xl font-bold text-white mb-2">{u.showcaseHeading}</h2>
             <p className="text-white/60 text-sm">{u.showcaseSubtitle}</p>
@@ -404,7 +614,7 @@ const UIUXDesign = () => {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#232329] rounded-xl p-3 flex flex-col gap-2 h-[180px]"
+                  className="bg-[#232329] rounded-xl p-3 flex flex-col gap-2 h-[150px]"
                 >
                   <div className="flex-1 min-h-0">
                     <Demo label={item.title} />
@@ -478,7 +688,7 @@ const UIUXDesign = () => {
           <p className="text-white/60 text-sm">{u.ctaText}</p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px]"
+            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] mx-auto"
           >
             {s.getInTouch}
           </Link>
@@ -564,7 +774,7 @@ const UIUXDesign = () => {
               <p className="text-white/60 max-w-[600px]">{u.ctaText}</p>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px]"
+                className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] mx-auto"
               >
                 {s.getInTouch}
               </Link>

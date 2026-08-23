@@ -50,15 +50,34 @@ const CookieConsent = () => {
 
   useEffect(() => {
     const stored = readStoredConsent();
-    if (!stored) setVisible(true);
-    else setAnalytics(!!stored.categories?.analytics);
+    if (stored) setAnalytics(!!stored.categories?.analytics);
+
+    const showIfUndecided = () => {
+      if (!readStoredConsent()) setVisible(true);
+    };
+
+    let demoNoticeDismissed = true;
+    try {
+      demoNoticeDismissed = !!window.localStorage.getItem("demo_notice_dismissed");
+    } catch {
+      demoNoticeDismissed = true;
+    }
+
+    if (demoNoticeDismissed) {
+      showIfUndecided();
+    } else {
+      window.addEventListener("demo-notice-dismissed", showIfUndecided, { once: true });
+    }
 
     const reopen = () => {
       setExpanded(true);
       setVisible(true);
     };
     window.addEventListener("open-cookie-settings", reopen);
-    return () => window.removeEventListener("open-cookie-settings", reopen);
+    return () => {
+      window.removeEventListener("demo-notice-dismissed", showIfUndecided);
+      window.removeEventListener("open-cookie-settings", reopen);
+    };
   }, []);
 
   const acceptAll = () => {

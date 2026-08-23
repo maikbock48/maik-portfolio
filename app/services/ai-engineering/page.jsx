@@ -121,7 +121,7 @@ const AIEngineering = () => {
           </div>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all whitespace-nowrap"
+            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all whitespace-nowrap mx-auto"
           >
             {s.getInTouch}
           </Link>

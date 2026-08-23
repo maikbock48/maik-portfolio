@@ -6,10 +6,10 @@ const stairAnimation = {
     bottom: "0%",
   },
   animate: {
-    bottom: "100%",
+    bottom: "-100%",
   },
   exit: {
-    bottom: ["100%", "0%"],
+    bottom: ["-100%", "0%"],
   },
 };
 
@@ -36,9 +36,9 @@ const Stairs = () => {
             animate="animate"
             exit="exit"
             transition={{
-              duration: 0.17,
+              duration: 0.19,
               ease: "easeInOut",
-              delay: reverseIndex(index) * 0.034,
+              delay: reverseIndex(index) * 0.038,
             }}
             className="h-full w-full bg-white relative"
           />

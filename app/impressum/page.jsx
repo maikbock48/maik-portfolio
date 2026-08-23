@@ -3,12 +3,6 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-const Placeholder = ({ children }) => (
-  <span className="bg-yellow-500/20 text-yellow-400 px-1.5 py-0.5 rounded text-[0.95em]">
-    {children}
-  </span>
-);
-
 export default function ImpressumPage() {
   return (
     <section className="py-16 xl:py-24">
@@ -16,17 +10,21 @@ export default function ImpressumPage() {
         <h1 className="h2 mb-10">Impressum</h1>
 
         <div className="flex flex-col gap-10 text-white/80 leading-relaxed">
+          <div className="bg-[#232329] border border-accent/20 rounded-xl p-6">
+            <h2 className="text-xl font-semibold text-accent mb-3">Status dieser Website</h2>
+            <p>
+              Diese Website ist ein privates, nicht-kommerzielles Portfolio-Projekt. Es werden hier
+              aktuell keine gewerblichen Dienstleistungen angeboten und keine Aufträge entgegengenommen.
+              Die Seite dient dazu, Freunden, Kontakten und potenziellen Arbeitgebern meine Fähigkeiten
+              als Softwareentwickler zu zeigen. Eine Anmeldung als Selbstständiger/Gewerbetreibender ist
+              zum 1. November 2027 geplant — sobald das erfolgt ist, wird dieses Impressum um die dann
+              erforderlichen vollständigen Angaben (u. a. Anschrift und Umsatzsteuer-Status) ergänzt.
+            </p>
+          </div>
+
           <div>
             <h2 className="text-xl font-semibold text-white mb-3">Angaben gemäß § 5 DDG</h2>
-            <p>
-              Maik Bock
-              <br />
-              <Placeholder>[Straße und Hausnummer]</Placeholder>
-              <br />
-              <Placeholder>[PLZ und Ort]</Placeholder>
-              <br />
-              <Placeholder>[Land]</Placeholder>
-            </p>
+            <p>Maik M. Bock</p>
           </div>
 
           <div>
@@ -39,36 +37,10 @@ export default function ImpressumPage() {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold text-white mb-3">Umsatzsteuer-ID</h2>
-            <p>
-              <Placeholder>
-                [Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG, falls vorhanden — andernfalls
-                Hinweis: „Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).“]
-              </Placeholder>
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-3">Berufsbezeichnung und -haftpflicht</h2>
-            <p>
-              Tätigkeit: Full Stack &amp; AI Engineer (Softwareentwicklung)
-              <br />
-              <Placeholder>
-                [Falls gewerblich angemeldet: Gewerbeanmeldung/zuständige Kammer angeben. Falls
-                freiberuflich tätig: kann entfallen.]
-              </Placeholder>
-            </p>
-          </div>
-
-          <div>
             <h2 className="text-xl font-semibold text-white mb-3">
               Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
             </h2>
-            <p>
-              Maik Bock
-              <br />
-              <Placeholder>[Anschrift wie oben]</Placeholder>
-            </p>
+            <p>Maik M. Bock, Kontaktdaten wie oben.</p>
           </div>
 
           <div>

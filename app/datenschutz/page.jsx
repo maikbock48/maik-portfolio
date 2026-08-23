@@ -23,13 +23,21 @@ export default function DatenschutzPage() {
         <h1 className="h2 mb-10">Datenschutzerklärung</h1>
 
         <div className="flex flex-col gap-10 text-white/80 leading-relaxed">
+          <div className="bg-[#232329] border border-accent/20 rounded-xl p-6">
+            <h2 className="text-xl font-semibold text-accent mb-3">Status dieser Website</h2>
+            <p>
+              Diese Website ist ein privates, nicht-kommerzielles Portfolio-Projekt und bietet aktuell
+              keine gewerblichen Dienstleistungen an. Eine Anmeldung als Selbstständiger ist zum
+              1. November 2027 geplant. Die nachfolgenden Angaben gelten unabhängig davon bereits jetzt
+              für alle personenbezogenen Daten, die über diese Website verarbeitet werden.
+            </p>
+          </div>
+
           <Section title="1. Verantwortlicher">
             <p>
               Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:
               <br />
-              Maik Bock
-              <br />
-              <Placeholder>[Straße und Hausnummer, PLZ Ort]</Placeholder>
+              Maik M. Bock
               <br />
               E-Mail: coding.maikel@gmail.com
               <br />

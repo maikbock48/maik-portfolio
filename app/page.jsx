@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
@@ -27,7 +29,28 @@ const Home = () => {
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl">{h.role}</span>
             <TypewriterHeading greeting={h.greeting} name={h.name} />
-            <p className="max-w-[500px] mb-9 text-white/80">{h.description}</p>
+            <p className="max-w-[500px] mb-6 text-white/80">{h.description}</p>
+            {/* free-talk CTA */}
+            <a
+              href="https://wa.me/491626310090"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mb-6"
+            >
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    "0 0 0px 0px rgba(0,217,255,0.5)",
+                    "0 0 0px 10px rgba(0,217,255,0)",
+                  ],
+                }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 rounded-full bg-accent text-primary font-bold uppercase tracking-wide px-6 py-3 hover:bg-accent-hover transition-colors"
+              >
+                <FaWhatsapp className="text-xl" />
+                <span>{h.talkFree}</span>
+              </motion.div>
+            </a>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <a href={`/cv.html?lang=${cvLang}`} target="_blank" rel="noopener noreferrer">

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
-import { FaReact, FaNodeJs, FaDatabase, FaMobile } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaDatabase, FaMobile, FaRobot } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { useLanguage } from "@/lib/language-context";
 
@@ -15,8 +15,9 @@ const techIcons = [
   <SiTypescript key="ts" />,
   <FaDatabase key="d" />,
   <FaMobile key="m" />,
+  <FaRobot key="ai" />,
 ];
-const techNames = ["React.js", "Next.js", "Node.js", "Tailwind CSS", "TypeScript", "Database Design", "Responsive Design"];
+const techNames = ["React.js", "Next.js", "Node.js", "Tailwind CSS", "TypeScript", "Database Design", "Responsive Design", "AI & Agents"];
 
 const WebDevelopment = () => {
   const { t } = useLanguage();
@@ -96,7 +97,7 @@ const WebDevelopment = () => {
             <p className="text-white/60 max-w-[600px]">{w.ctaText}</p>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px]"
+              className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] mx-auto"
             >
               {s.getInTouch}
             </Link>
