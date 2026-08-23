@@ -31,10 +31,9 @@ const Home = () => {
             <TypewriterHeading greeting={h.greeting} name={h.name} />
             <p className="max-w-[500px] mb-6 text-white/80">{h.description}</p>
             {/* free-talk CTA */}
-            <a
-              href="https://wa.me/491626310090"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("open-whatsapp-confirm"))}
               className="inline-block mb-6"
             >
               <motion.div
@@ -50,7 +49,7 @@ const Home = () => {
                 <FaWhatsapp className="text-xl" />
                 <span>{h.talkFree}</span>
               </motion.div>
-            </a>
+            </button>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <a href={`/cv.html?lang=${cvLang}`} target="_blank" rel="noopener noreferrer">

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +17,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLanguage } from "@/lib/language-context";
+
+const FORM_DISABLED = true;
+const WHATSAPP_HREF = "https://wa.me/491626310090";
+const EMAIL_HREF = "mailto:coding.maikel@gmail.com";
 
 const ContactForm = ({ compact = false, showFunnelChips = true }) => {
   const { t } = useLanguage();
@@ -30,9 +36,16 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [blocked, setBlocked] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (FORM_DISABLED) {
+      setBlocked(true);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -57,6 +70,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
   };
 
   return (
+    <>
     <form
       onSubmit={handleSubmit}
       className={`flex flex-col gap-4 ${
@@ -129,6 +143,53 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
         {isSubmitting ? c.sending : c.send}
       </Button>
     </form>
+
+    <AnimatePresence>
+      {blocked && (
+        <>
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setBlocked(false)}
+          />
+          <motion.div
+            className="fixed top-1/2 left-1/2 z-50 bg-[#1c1c22] border border-accent/30 rounded-2xl p-8 sm:p-10 flex flex-col items-center gap-4 shadow-[0_0_60px_rgba(0,217,255,0.15)] max-w-sm w-[90vw] text-center"
+            initial={{ opacity: 0, scale: 0.85, x: "-50%", y: "-48%" }}
+            animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+            exit={{ opacity: 0, scale: 0.85, x: "-50%", y: "-48%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          >
+            <h2 className="text-xl font-bold text-white">{c.blockedTitle}</h2>
+            <p className="text-white/60 text-sm leading-relaxed">{c.blockedText}</p>
+            <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-accent bg-accent text-primary text-sm font-semibold hover:bg-accent-hover transition-all duration-300"
+              >
+                <FaWhatsapp /> {c.blockedWhatsapp}
+              </a>
+              <a
+                href={EMAIL_HREF}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-white/20 text-white/70 text-sm font-semibold hover:border-white/40 transition-all duration-300"
+              >
+                <FaEnvelope /> {c.blockedEmail}
+              </a>
+            </div>
+            <button
+              onClick={() => setBlocked(false)}
+              className="text-white/40 text-xs hover:text-white/70 transition-colors mt-1"
+            >
+              {c.blockedClose}
+            </button>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt, FaWhatsapp, FaEnvelope } from "react-icons/fa";
@@ -14,6 +14,12 @@ const ContactFab = () => {
   const f = t.contactFab;
   const [open, setOpen] = useState(false);
   const [activeConfirm, setActiveConfirm] = useState(null); // null | "call" | "whatsapp"
+
+  useEffect(() => {
+    const openWhatsapp = () => setActiveConfirm("whatsapp");
+    window.addEventListener("open-whatsapp-confirm", openWhatsapp);
+    return () => window.removeEventListener("open-whatsapp-confirm", openWhatsapp);
+  }, []);
 
   const actions = [
     {
