@@ -97,6 +97,7 @@ const LogoDesign = () => {
                 alt="Paper logo example"
                 width={860}
                 height={350}
+                sizes="(min-width: 700px) 700px, 100vw"
                 className="w-full max-w-[700px] h-auto"
                 priority
               />

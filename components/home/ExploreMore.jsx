@@ -81,9 +81,10 @@ const ExploreMore = () => {
 
       observer = Observer.create({
         target: gridEl,
-        type: "wheel",
+        type: "wheel,touch,pointer",
         wheelSpeed: 1,
         tolerance: 10,
+        dragMinimum: 15,
         preventDefault: true,
         onDown: () => {
           if (panelRef.current === "bridge") goTo(gsap, "up");
@@ -157,7 +158,7 @@ const ExploreMore = () => {
 
             <div ref={gridRef} className="relative" style={{ height: "200vh", transform: "translateY(-100vh)" }}>
               {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
-              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-6 overflow-hidden">
+              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
                 <h2 className="relative z-10 h2">{e.title}</h2>
                 <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
@@ -168,15 +169,28 @@ const ExploreMore = () => {
                   ))}
                 </ul>
                 <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-2">{e.whatsappText}</p>
-                <a
-                  href={WHATSAPP_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 inline-flex items-center gap-2 rounded-full bg-accent text-primary font-semibold px-6 py-3 hover:bg-accent-hover transition-all"
-                >
-                  <FaWhatsapp className="text-xl" />
-                  {e.whatsappButton}
-                </a>
+                <div className="relative z-10 flex flex-col items-center gap-3">
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    <a
+                      href={WHATSAPP_HREF}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-accent text-primary font-semibold px-6 py-3 hover:bg-accent-hover transition-all"
+                    >
+                      <FaWhatsapp className="text-xl" />
+                      {e.whatsappButton}
+                    </a>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 rounded-full border border-accent/50 text-accent font-semibold px-6 py-3 hover:bg-accent/10 hover:border-accent transition-all"
+                    >
+                      {e.dreamButton}
+                    </Link>
+                  </div>
+                  <p className="text-white/50 text-xs max-w-[420px]">
+                    <span className="text-accent font-semibold">{e.noteLabel}</span> {e.note}
+                  </p>
+                </div>
 
                 <nav className="absolute bottom-10 md:bottom-14 left-0 right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
                   {navPaths.map((link, index) => (

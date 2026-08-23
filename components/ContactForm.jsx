@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -110,6 +111,13 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
       </Select>
       <Textarea className="h-[110px]" placeholder={c.message} value={formData.message}
         onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
+      <p className="text-white/40 text-xs leading-relaxed">
+        {c.privacyNotice}{" "}
+        <Link href="/datenschutz" className="text-accent hover:underline">
+          {c.privacyLinkLabel}
+        </Link>
+        .
+      </p>
       {submitStatus === "success" && <p className="text-green-500 text-sm">{c.success}</p>}
       {submitStatus === "error" && <p className="text-red-500 text-sm">{c.error}</p>}
       <Button

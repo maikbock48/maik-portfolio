@@ -87,7 +87,7 @@ const TypewriterHeading = ({ greeting, name, speed = 90 }) => {
   }, []);
 
   return (
-    <h1 className="h1 mb-6 break-words">
+    <h1 className="h1 mb-6 break-words max-[420px]:text-[42px]">
       {greetingDisplayed}
       <br />
       <span className="text-accent">{cyclePart}</span>

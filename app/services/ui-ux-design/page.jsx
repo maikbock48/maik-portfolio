@@ -10,7 +10,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { useLanguage } from "@/lib/language-context";
 import { playClick, playPop, playDing, playBoing, playSwoosh, playTick } from "@/lib/sound";
 
-const MagneticDemo = ({ label }) => {
+const MagneticDemo = () => {
   const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
   const y = useSpring(0, { stiffness: 150, damping: 15, mass: 0.5 });
   const scale = useSpring(1, { stiffness: 300, damping: 10 });
@@ -34,10 +34,8 @@ const MagneticDemo = ({ label }) => {
     >
       <motion.div
         style={{ x, y, scale }}
-        className="w-12 h-12 rounded-full bg-accent text-primary flex items-center justify-center text-[9px] font-bold text-center px-1"
-      >
-        {label}
-      </motion.div>
+        className="w-12 h-12 rounded-full bg-accent"
+      />
     </div>
   );
 };

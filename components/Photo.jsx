@@ -28,7 +28,8 @@ const Photo = () => {
             priority
             quality={80}
             fill
-            alt=""
+            sizes="(min-width: 1200px) 498px, 298px"
+            alt="Maik Bock, Full Stack & AI Engineer"
             className="object-cover object-[50%_30%]"
           />
           {/* narrow but intense blur right at the border, leaving the center of the photo sharp */}

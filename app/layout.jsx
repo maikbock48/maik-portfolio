@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 import ContactFab from "@/components/ContactFab";
+import CookieConsent from "@/components/CookieConsent";
 import { LanguageProvider } from "@/lib/language-context";
 
 const poppins = Poppins({
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
           <PageTransition>{children}</PageTransition>
           <Footer />
           <ContactFab />
+          <CookieConsent />
         </LanguageProvider>
       </body>
     </html>
