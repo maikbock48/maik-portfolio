@@ -12,6 +12,7 @@ const routes = [
   "/work",
   "/resume",
   "/contact",
+  "/datenschutz",
 ];
 
 export default function sitemap() {

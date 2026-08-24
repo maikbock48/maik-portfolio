@@ -1,6 +1,5 @@
 export const metadata = {
   title: "Datenschutzerklärung – Maik Bock",
-  robots: { index: false, follow: false },
 };
 
 const Placeholder = ({ children }) => (
@@ -66,11 +65,10 @@ export default function DatenschutzPage() {
               Betriebs sowie zur Gewährleistung der Sicherheit unserer IT-Systeme (Art. 6 Abs. 1 lit. f
               DSGVO). Da Vercel in den USA ansässig ist, kann eine Datenübermittlung in ein Drittland
               stattfinden; diese erfolgt auf Grundlage von EU-Standardvertragsklauseln bzw. im Rahmen
-              des EU-US Data Privacy Framework.{" "}
-              <Placeholder>
-                [Bitte den aktuellen Auftragsverarbeitungsvertrag (DPA) sowie den genauen
-                Zertifizierungsstatus von Vercel prüfen und diesen Absatz bei Bedarf anpassen.]
-              </Placeholder>
+              des EU-US Data Privacy Framework. Vercel bietet im Rahmen seiner Nutzungsbedingungen
+              einen Auftragsverarbeitungsvertrag (Data Processing Addendum) an, der die aktuellen
+              EU-Standardvertragsklauseln für internationale Datenübermittlungen einbezieht (Stand:
+              vercel.com/legal/dpa).
             </p>
           </Section>
 
@@ -81,12 +79,10 @@ export default function DatenschutzPage() {
               Leistung sowie Ihre Nachricht) zum Zwecke der Bearbeitung Ihrer Anfrage verarbeitet
               (Art. 6 Abs. 1 lit. b DSGVO). Der Versand erfolgt über den E-Mail-Dienstleister Resend
               (Resend, Inc., USA), der hierbei als Auftragsverarbeiter für uns tätig wird. Auch hier
-              kann eine Datenübermittlung in die USA stattfinden, abgesichert durch
-              EU-Standardvertragsklauseln.{" "}
-              <Placeholder>
-                [Bitte prüfen, ob ein Auftragsverarbeitungsvertrag (AVV) mit Resend abgeschlossen
-                wurde.]
-              </Placeholder>{" "}
+              kann eine Datenübermittlung in die USA stattfinden. Resend bietet einen
+              Auftragsverarbeitungsvertrag an, unterliegt den EU-Standardvertragsklauseln für
+              internationale Datenübermittlungen und hat sich zur Einhaltung des EU-US Data Privacy
+              Framework (sowie dessen UK-Erweiterung) verpflichtet (Stand: resend.com/legal/dpa).
               Ihre Angaben aus dem Kontaktformular verbleiben bei uns, bis Sie uns zur Löschung
               auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die
               Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihrer Anfrage).
@@ -95,7 +91,22 @@ export default function DatenschutzPage() {
             </p>
           </Section>
 
-          <Section title="5. Cookies und Einwilligungsverwaltung (Cookie-Consent)">
+          <Section title="5. Schutz vor Missbrauch (Rate-Limiting)">
+            <p>
+              Um das Kontaktformular sowie die Cookie-Einwilligungsverwaltung vor automatisiertem
+              Missbrauch (z. B. Spam oder überhöhten Anfragemengen) zu schützen, wird die IP-Adresse
+              anfragender Nutzer serverseitig kurzzeitig bei unserem Infrastruktur-Anbieter Upstash,
+              Inc., USA, gezählt. Die Zählung dient ausschließlich der Erkennung ungewöhnlich vieler
+              Anfragen von derselben IP-Adresse innerhalb kurzer Zeit; der jeweilige Zählerstand läuft
+              automatisch nach 10 bzw. 20 Minuten ab und wird danach nicht weiter gespeichert (Art. 6
+              Abs. 1 lit. f DSGVO — berechtigtes Interesse an einem funktionsfähigen, missbrauchsfreien
+              Angebot). Auch hier kann eine Datenübermittlung in die USA stattfinden. Upstash bietet
+              einen Auftragsverarbeitungsvertrag an und hat sich zur Einhaltung des EU-US Data Privacy
+              Framework verpflichtet (Stand: upstash.com/trust).
+            </p>
+          </Section>
+
+          <Section title="6. Cookies und Einwilligungsverwaltung (Cookie-Consent)">
             <p>
               Unsere Website verwendet ein Cookie-Consent-Tool, mit dem Sie festlegen können, welche
               nicht technisch notwendigen Cookies bzw. Dienste geladen werden dürfen. Technisch
@@ -106,8 +117,10 @@ export default function DatenschutzPage() {
               (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG) aktiviert. Sie können Ihre Einwilligung
               jederzeit mit Wirkung für die Zukunft über den Link „Cookie-Einstellungen“ im Footer
               widerrufen oder anpassen. Ihre Entscheidung wird zusammen mit einem Zeitstempel und einer
-              zufällig erzeugten, nicht auf Ihre Person rückführbaren Kennung serverseitig protokolliert,
-              um die Einwilligung im Streitfall nachweisen zu können.
+              zufällig erzeugten, nicht auf Ihre Person rückführbaren Kennung serverseitig bei unserem
+              Infrastruktur-Anbieter Upstash, Inc., USA, protokolliert, um die Einwilligung im
+              Streitfall nachweisen zu können (zu Upstash und internationalen Datenübermittlungen siehe
+              Abschnitt 5).
             </p>
             <p>
               <Placeholder>
@@ -119,16 +132,25 @@ export default function DatenschutzPage() {
             </p>
           </Section>
 
-          <Section title="6. Eingebundene Schriftarten">
+          <Section title="7. Eingebundene Schriftarten">
             <p>
-              Diese Website nutzt die Schriftart „Poppins“ von Google Fonts. Die Schriftdatei wird
+              Diese Website nutzt die Schriftart „Poppins” von Google Fonts. Die Schriftdatei wird
               beim Build der Website lokal eingebunden und beim Aufruf der Seite ausschließlich von
-              unserem eigenen Server ausgeliefert. Es findet keine Verbindung zu Servern von Google
-              statt und es werden dabei keine personenbezogenen Daten an Google übermittelt.
+              unserem eigenen Server ausgeliefert. Es findet dabei keine Verbindung zu Servern von
+              Google statt und es werden keine personenbezogenen Daten an Google übermittelt.
+            </p>
+            <p>
+              Die separat abrufbare Lebenslauf-Seite (aufrufbar über den „Download CV“-Button) bindet
+              Schriftarten von Google Fonts hingegen direkt über die Server von Google ein. Beim Aufruf
+              dieser Seite wird daher eine Verbindung zu Google hergestellt, wobei Ihre IP-Adresse an
+              Google übermittelt werden kann. Diese Verarbeitung erfolgt auf Grundlage berechtigter
+              Interessen an einer technisch einfachen, einheitlichen Darstellung (Art. 6 Abs. 1 lit. f
+              DSGVO). Weitere Informationen zum Umgang von Google mit Ihren Daten finden Sie in der
+              Datenschutzerklärung von Google unter policies.google.com/privacy.
             </p>
           </Section>
 
-          <Section title="7. Ihre Rechte als betroffene Person">
+          <Section title="8. Ihre Rechte als betroffene Person">
             <p>Ihnen stehen gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten zu:</p>
             <ul className="list-disc pl-6 flex flex-col gap-1">
               <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
@@ -145,25 +167,27 @@ export default function DatenschutzPage() {
             </p>
           </Section>
 
-          <Section title="8. Beschwerderecht bei einer Aufsichtsbehörde">
+          <Section title="9. Beschwerderecht bei einer Aufsichtsbehörde">
             <p>
-              Ihnen steht zudem ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu, insbesondere
-              in dem Mitgliedstaat Ihres gewöhnlichen Aufenthalts, Ihres Arbeitsplatzes oder des Orts des
-              mutmaßlichen Verstoßes.{" "}
-              <Placeholder>
-                [Zuständige Aufsichtsbehörde je nach Bundesland/Wohnsitz ergänzen, z. B. Landesbeauftragte
-                für Datenschutz und Informationsfreiheit.]
-              </Placeholder>
+              Ihnen steht ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu, insbesondere in
+              dem Mitgliedstaat Ihres gewöhnlichen Aufenthalts, Ihres Arbeitsplatzes oder des Orts des
+              mutmaßlichen Verstoßes. Für den Sitz des Verantwortlichen ist zuständig:
+              <br />
+              Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)
+              <br />
+              Kavalleriestr. 2–4, 40213 Düsseldorf
+              <br />
+              Telefon: 0211 38424-0, E-Mail: poststelle@ldi.nrw.de, Web: www.ldi.nrw.de
             </p>
           </Section>
 
-          <Section title="9. Aktualität und Änderung dieser Datenschutzerklärung">
+          <Section title="10. Aktualität und Änderung dieser Datenschutzerklärung">
             <p>
               Diese Datenschutzerklärung ist aktuell gültig. Durch die Weiterentwicklung unserer Website
               und Angebote oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es
               notwendig werden, diese Datenschutzerklärung zu ändern.
               <br />
-              Stand: <Placeholder>[Datum der letzten Aktualisierung einsetzen]</Placeholder>
+              Stand: 24. August 2026
             </p>
           </Section>
         </div>
