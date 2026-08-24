@@ -27,7 +27,7 @@ const ServicesMenuPanel = ({ className = "", onNavigate, solid = false }) => {
   return (
     <div
       className={`rounded-2xl border border-white/10 ${
-        solid ? "bg-[#18181d]" : "bg-[#18181d]/95 backdrop-blur-xl"
+        solid ? "bg-[#18181d]" : "bg-[#18181d]/70 backdrop-blur-xl"
       } shadow-[0_25px_70px_rgba(0,0,0,0.55)] p-3 ${className}`}
     >
       <div className="grid grid-cols-2 gap-1">
