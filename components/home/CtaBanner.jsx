@@ -20,7 +20,11 @@ const CtaBanner = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
-          className="relative min-h-[600px] sm:min-h-[540px] md:min-h-[480px] [perspective:1500px]"
+          className={`relative [perspective:1500px] transition-[min-height] duration-700 ease-in-out ${
+            flipped
+              ? "min-h-[760px] sm:min-h-[680px] md:min-h-[620px]"
+              : "min-h-[600px] sm:min-h-[540px] md:min-h-[480px]"
+          }`}
         >
           <motion.div
             className="absolute inset-0 [transform-style:preserve-3d]"
