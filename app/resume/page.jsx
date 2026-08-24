@@ -59,7 +59,7 @@ const aboutInfo = [
   { fieldName: "Experience", fieldValue: null },
   { fieldName: "Nickname", fieldValue: "maikel" },
   { fieldName: "Nationality", fieldValue: "German" },
-  { fieldName: "Email", fieldValue: "maik.bock48@gmail.com" },
+  { fieldName: "Email", fieldValue: "coding.maikel@gmail.com" },
   { fieldName: "Freelance", fieldValue: null },
   { fieldName: "Languages", fieldValue: "English, German, Polish" },
 ];

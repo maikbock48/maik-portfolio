@@ -16,7 +16,13 @@ const Stats = () => {
               key={index}
             >
               <span className="text-4xl xl:text-6xl font-extrabold text-right xl:text-left">
-                <CountUp end={item.num} duration={5} delay={2} />
+                <CountUp
+                  end={item.num}
+                  duration={2.5}
+                  enableScrollSpy
+                  scrollSpyOnce
+                  scrollSpyDelay={200}
+                />
                 {item.suffix}
               </span>
               <p

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "remotion:studio": "remotion studio remotion/index.js",
+    "remotion:render": "remotion render remotion/index.js ProcessShowcase public/videos/process-showcase.mp4"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
@@ -33,9 +35,15 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@remotion/bundler": "^4.0.516",
+    "@remotion/cli": "^4.0.516",
+    "@remotion/google-fonts": "^4.0.516",
+    "@remotion/renderer": "^4.0.516",
+    "@remotion/transitions": "^4.0.516",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
+    "remotion": "^4.0.516",
     "tailwindcss": "^3.4.1"
   }
 }

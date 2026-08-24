@@ -98,6 +98,8 @@ const Process = () => {
               className="flex justify-center xl:justify-start"
             >
               <VideoFrame
+                src="/videos/process-showcase.mp4"
+                poster="/videos/process-showcase-poster.jpg"
                 caption={p.video.caption}
                 comingSoon={p.video.comingSoon}
               />
