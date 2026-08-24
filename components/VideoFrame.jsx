@@ -16,7 +16,6 @@ const VideoFrame = ({ src, poster, caption, comingSoon, autoPlayOnView }) => {
     if (!autoPlayOnView || !src || !videoRef.current) return;
     const video = videoRef.current;
     video.muted = true;
-    video.loop = true;
     video.play().catch(() => {});
   }, [autoPlayOnView, src]);
 
