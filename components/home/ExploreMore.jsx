@@ -225,7 +225,7 @@ const ExploreMore = () => {
                         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[min(640px,88vw)] z-20"
                       >
-                        <ServicesMenuPanel onNavigate={() => setServicesMenuOpen(false)} />
+                        <ServicesMenuPanel solid onNavigate={() => setServicesMenuOpen(false)} />
                       </motion.div>
                     )}
                   </AnimatePresence>

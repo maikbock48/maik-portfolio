@@ -91,7 +91,7 @@ const Nav = () => {
                     transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute left-1/2 -translate-x-1/2 top-full pt-5 w-[640px] z-50"
                   >
-                    <ServicesMenuPanel solid />
+                    <ServicesMenuPanel />
                   </motion.div>
                 )}
               </AnimatePresence>
