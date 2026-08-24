@@ -53,6 +53,12 @@ const nextConfig = {
         destination: "https://codewithmaik.com/:path*",
         permanent: true,
       },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "codewithmaik.vercel.app" }],
+        destination: "https://codewithmaik.com/:path*",
+        permanent: true,
+      },
     ];
   },
 };

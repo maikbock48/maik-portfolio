@@ -1,4 +1,4 @@
-const baseUrl = "https://codewithmaik.vercel.app";
+const baseUrl = "https://codewithmaik.com";
 
 const routes = [
   "",

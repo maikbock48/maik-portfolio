@@ -13,7 +13,7 @@ const VCARD = [
   "FN:Maik Bock",
   "TEL;TYPE=CELL:+491626310090",
   "EMAIL:coding.maikel@gmail.com",
-  "URL:https://codewithmaik.vercel.app",
+  "URL:https://codewithmaik.com",
   "END:VCARD",
 ].join("\n");
 

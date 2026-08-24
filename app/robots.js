@@ -13,6 +13,6 @@ export default function robots() {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://codewithmaik.vercel.app/sitemap.xml",
+    sitemap: "https://codewithmaik.com/sitemap.xml",
   };
 }

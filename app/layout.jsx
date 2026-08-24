@@ -18,7 +18,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const siteUrl = "https://codewithmaik.vercel.app";
+const siteUrl = "https://codewithmaik.com";
 const title = "Maik Bock – Software Developer";
 const description =
   "Portfolio of Maik Bock, Full Stack & AI Engineer building fast, standout web apps end-to-end — presence sites, online shops, AI integrations, and consumer apps.";
