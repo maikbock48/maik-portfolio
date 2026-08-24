@@ -13,17 +13,17 @@ const CtaBanner = () => {
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <section className="py-12 xl:py-16">
+    <section className="pt-4 pb-12 xl:pt-6 xl:pb-16">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
-          className={`relative [perspective:1500px] transition-[min-height] duration-700 ease-in-out ${
+          className={`relative mx-auto [perspective:1500px] transition-[min-height,max-width] duration-700 ease-in-out ${
             flipped
-              ? "min-h-[760px] sm:min-h-[680px] md:min-h-[620px]"
-              : "min-h-[600px] sm:min-h-[540px] md:min-h-[480px]"
+              ? "max-w-[640px] min-h-[760px] sm:min-h-[680px] md:min-h-[620px]"
+              : "max-w-full min-h-[600px] sm:min-h-[540px] md:min-h-[480px]"
           }`}
         >
           <motion.div
@@ -56,7 +56,7 @@ const CtaBanner = () => {
               >
                 <FiX />
               </button>
-              <ContactForm compact showFunnelChips={false} />
+              <ContactForm compact showFunnelChips={false} fillHeight />
             </div>
           </motion.div>
         </motion.div>

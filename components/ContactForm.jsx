@@ -19,7 +19,7 @@ import { useLanguage } from "@/lib/language-context";
 
 const FORM_DISABLED = true;
 
-const ContactForm = ({ compact = false, showFunnelChips = true }) => {
+const ContactForm = ({ compact = false, showFunnelChips = true, fillHeight = false }) => {
   const { t } = useLanguage();
   const c = t.contact;
 
@@ -72,7 +72,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
       onSubmit={handleSubmit}
       className={`flex flex-col gap-4 ${
         compact ? "px-5 py-6 sm:px-7 sm:py-7" : "px-6 sm:px-10 py-7"
-      } bg-[#27272c] rounded-xl`}
+      } ${fillHeight ? "h-full" : ""} bg-[#27272c] rounded-xl`}
     >
       {!compact && (
         <>
@@ -120,8 +120,13 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Textarea className="h-[110px]" placeholder={c.message} value={formData.message}
-        onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
+      <Textarea
+        className={fillHeight ? "flex-1 min-h-[110px]" : "h-[110px]"}
+        placeholder={c.message}
+        value={formData.message}
+        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+        required
+      />
       <p className="text-white/40 text-xs leading-relaxed">
         {c.privacyNotice}{" "}
         <Link href="/datenschutz" className="text-accent hover:underline">
