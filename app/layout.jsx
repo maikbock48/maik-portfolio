@@ -67,8 +67,8 @@ const siteJsonLd = {
         "SEO",
       ],
       sameAs: [
-        "https://github.com/embe-coding",
-        "https://www.linkedin.com/in/maik-m-bock-874a93392",
+        "https://github.com/codewithmaik",
+        "https://www.linkedin.com/in/codewithmaik",
       ],
     },
     {

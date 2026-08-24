@@ -57,7 +57,7 @@ const Footer = () => {
           </nav>
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/embe-coding"
+              href="https://github.com/codewithmaik"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -66,7 +66,7 @@ const Footer = () => {
               <FaGithub />
             </a>
             <a
-              href="https://www.linkedin.com/in/maik-m-bock-874a93392?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              href="https://www.linkedin.com/in/codewithmaik"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
