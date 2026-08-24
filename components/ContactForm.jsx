@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,8 +18,6 @@ import {
 import { useLanguage } from "@/lib/language-context";
 
 const FORM_DISABLED = true;
-const WHATSAPP_HREF = "https://wa.me/491626310090";
-const EMAIL_HREF = "mailto:coding.maikel@gmail.com";
 
 const ContactForm = ({ compact = false, showFunnelChips = true }) => {
   const { t } = useLanguage();
@@ -163,22 +160,6 @@ const ContactForm = ({ compact = false, showFunnelChips = true }) => {
           >
             <h2 className="text-xl font-bold text-white">{c.blockedTitle}</h2>
             <p className="text-white/60 text-sm leading-relaxed">{c.blockedText}</p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
-              <a
-                href={WHATSAPP_HREF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-accent bg-accent text-primary text-sm font-semibold hover:bg-accent-hover transition-all duration-300"
-              >
-                <FaWhatsapp /> {c.blockedWhatsapp}
-              </a>
-              <a
-                href={EMAIL_HREF}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-white/20 text-white/70 text-sm font-semibold hover:border-white/40 transition-all duration-300"
-              >
-                <FaEnvelope /> {c.blockedEmail}
-              </a>
-            </div>
             <button
               onClick={() => setBlocked(false)}
               className="text-white/40 text-xs hover:text-white/70 transition-colors mt-1"

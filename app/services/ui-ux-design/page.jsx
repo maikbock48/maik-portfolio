@@ -4,9 +4,9 @@ import { useState, useRef, useMemo, useLayoutEffect, useEffect } from "react";
 import { motion, useSpring, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
-import { FaFigma, FaPencilRuler, FaMobile, FaUsers } from "react-icons/fa";
+import { FaFigma, FaPencilRuler, FaMobile, FaUsers, FaHeart, FaStar, FaBell } from "react-icons/fa";
 import { SiAdobexd, SiSketch } from "react-icons/si";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiCopy, FiCheck } from "react-icons/fi";
 import { useLanguage } from "@/lib/language-context";
 import { playClick, playPop, playDing, playBoing, playSwoosh, playTick } from "@/lib/sound";
 import ParticleBackground from "@/components/home/ParticleBackground";
@@ -457,6 +457,233 @@ const BlinkCursorDemo = () => {
   );
 };
 
+const LikeBurstDemo = () => {
+  const [liked, setLiked] = useState(false);
+  const [burstId, setBurstId] = useState(0);
+  const scale = useSpring(1, { stiffness: 400, damping: 10 });
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 6 }, (_, i) => {
+        const angle = (i / 6) * Math.PI * 2;
+        return { dx: Math.cos(angle) * 22, dy: Math.sin(angle) * 22 };
+      }),
+    []
+  );
+  return (
+    <div
+      className="relative w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playPop();
+        setLiked((v) => !v);
+        setBurstId((id) => id + 1);
+        scale.set(1.4);
+        setTimeout(() => scale.set(1), 200);
+      }}
+    >
+      <motion.div style={{ scale }}>
+        <FaHeart className={`text-2xl transition-colors ${liked ? "text-accent" : "text-white/25"}`} />
+      </motion.div>
+      <AnimatePresence>
+        {liked &&
+          particles.map((p, i) => (
+            <motion.span
+              key={`${burstId}-${i}`}
+              className="absolute w-1 h-1 rounded-full bg-accent"
+              initial={{ x: 0, y: 0, opacity: 1 }}
+              animate={{ x: p.dx, y: p.dy, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
+          ))}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const StarRatingDemo = () => {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const stars = [1, 2, 3, 4, 5];
+  return (
+    <div className="w-full h-full flex items-center justify-center gap-1">
+      {stars.map((s) => (
+        <FaStar
+          key={s}
+          onMouseEnter={() => setHover(s)}
+          onMouseLeave={() => setHover(0)}
+          onClick={() => {
+            playTick();
+            setRating(s);
+          }}
+          className={`text-lg cursor-pointer transition-colors ${
+            (hover || rating) >= s ? "text-accent" : "text-white/20"
+          }`}
+        />
+      ))}
+    </div>
+  );
+};
+
+const SkeletonLoadDemo = () => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playTick();
+        setLoaded((v) => !v);
+      }}
+    >
+      <div className="flex items-center gap-2">
+        <div className={`w-6 h-6 rounded-full ${loaded ? "bg-accent" : "bg-white/10 animate-pulse"}`} />
+        <div className="flex flex-col gap-1">
+          <div className={`w-14 h-2 rounded-full ${loaded ? "bg-white/50" : "bg-white/10 animate-pulse"}`} />
+          <div className={`w-10 h-2 rounded-full ${loaded ? "bg-white/30" : "bg-white/10 animate-pulse"}`} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TabUnderlineDemo = () => {
+  const [active, setActive] = useState(0);
+  const tabs = ["A", "B", "C"];
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="flex gap-4">
+        {tabs.map((label, i) => (
+          <button
+            key={label}
+            onClick={() => {
+              playClick();
+              setActive(i);
+            }}
+            className="relative pb-1.5 text-xs font-semibold"
+          >
+            <span className={active === i ? "text-accent" : "text-white/50"}>{label}</span>
+            {active === i && (
+              <motion.div
+                layoutId="tab-underline-demo"
+                className="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-accent rounded-full"
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const RangeSliderDemo = () => {
+  const trackWidth = 64;
+  const [value, setValue] = useState(0);
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+      <span className="text-[10px] text-accent font-bold">{value}%</span>
+      <div className="relative w-16 h-1.5 rounded-full bg-white/10">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: trackWidth }}
+          dragElastic={0}
+          dragMomentum={false}
+          onDragStart={playPop}
+          onDrag={(_, info) => {
+            const clamped = Math.min(Math.max(info.offset.x, 0), trackWidth);
+            setValue(Math.round((clamped / trackWidth) * 100));
+          }}
+          className="absolute top-1/2 -translate-y-1/2 left-0 w-3.5 h-3.5 rounded-full bg-accent cursor-grab active:cursor-grabbing"
+        />
+      </div>
+    </div>
+  );
+};
+
+const NotificationBadgeDemo = () => {
+  const [count, setCount] = useState(0);
+  const scale = useSpring(1, { stiffness: 400, damping: 10 });
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playDing();
+        setCount((c) => (c >= 9 ? 1 : c + 1));
+        scale.set(1.3);
+        setTimeout(() => scale.set(1), 180);
+      }}
+    >
+      <div className="relative">
+        <FaBell className="text-2xl text-white/50" />
+        <AnimatePresence>
+          {count > 0 && (
+            <motion.span
+              key={count}
+              style={{ scale }}
+              className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-4 h-4 rounded-full bg-accent text-primary text-[9px] font-bold"
+            >
+              {count}
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+const CopyFeedbackDemo = () => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center cursor-pointer"
+      onClick={() => {
+        playTick();
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      }}
+    >
+      <AnimatePresence mode="wait">
+        {copied ? (
+          <motion.div
+            key="check"
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <FiCheck className="text-2xl text-accent" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="copy"
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <FiCopy className="text-2xl text-white/50" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const DotsLoaderDemo = () => {
+  const dots = [0, 1, 2];
+  return (
+    <div className="w-full h-full flex items-center justify-center gap-1.5">
+      {dots.map((i) => (
+        <motion.span
+          key={i}
+          className="w-2.5 h-2.5 rounded-full bg-accent"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const toolIcons = [
   <FaFigma key="f" />,
   <SiAdobexd key="x" />,
@@ -572,8 +799,9 @@ const UIUXDesign = () => {
   }, [mounted, isDesktop]);
 
   const HeroPanel = () => (
-    <div className="h-screen w-screen flex items-center justify-center px-6">
-      <div className="max-w-[700px] flex flex-col gap-[30px]">
+    <div className="relative h-screen w-screen flex items-center justify-center px-6 overflow-hidden">
+      <ParticleBackground count={70} className="opacity-90" />
+      <div className="relative z-10 max-w-[700px] flex flex-col gap-[30px]">
         <div className="text-8xl font-extrabold text-outline text-transparent">02</div>
         <h1 className="text-5xl sm:text-6xl font-bold text-white">{u.title}</h1>
         <p className="max-w-[600px] text-white/60 text-xl">{u.subtitle}</p>
@@ -599,6 +827,14 @@ const UIUXDesign = () => {
       ProgressFillDemo,
       TiltCardDemo,
       BlinkCursorDemo,
+      LikeBurstDemo,
+      StarRatingDemo,
+      SkeletonLoadDemo,
+      TabUnderlineDemo,
+      RangeSliderDemo,
+      NotificationBadgeDemo,
+      CopyFeedbackDemo,
+      DotsLoaderDemo,
     ];
     return (
       <div className="relative h-screen w-screen flex items-center px-8 xl:px-12 overflow-hidden">
@@ -614,7 +850,7 @@ const UIUXDesign = () => {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#232329] rounded-xl p-3 flex flex-col gap-2 h-[150px]"
+                  className="bg-[#232329] rounded-xl p-3 flex flex-col gap-2 h-[130px]"
                 >
                   <div className="flex-1 min-h-0">
                     <Demo label={item.title} />
@@ -633,8 +869,9 @@ const UIUXDesign = () => {
   };
 
   const ToolsApproachPanel = () => (
-    <div className="h-screen w-screen flex items-center px-10 xl:px-16">
-      <div className="grid grid-cols-2 gap-10 w-full max-w-[1400px] mx-auto">
+    <div className="relative h-screen w-screen flex items-center px-10 xl:px-16 overflow-hidden">
+      <ParticleBackground count={70} className="opacity-90" />
+      <div className="relative z-10 grid grid-cols-2 gap-10 w-full max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-5">
           <h2 className="text-2xl font-bold text-white">{u.toolsHeading}</h2>
           <ul className="grid grid-cols-3 gap-3">
@@ -669,8 +906,9 @@ const UIUXDesign = () => {
   );
 
   const ProcessCtaPanel = () => (
-    <div className="h-screen w-screen flex items-center px-10 xl:px-16">
-      <div className="grid grid-cols-2 gap-10 w-full max-w-[1400px] mx-auto">
+    <div className="relative h-screen w-screen flex items-center px-10 xl:px-16 overflow-hidden">
+      <ParticleBackground count={70} className="opacity-90" />
+      <div className="relative z-10 grid grid-cols-2 gap-10 w-full max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-5">
           <h2 className="text-2xl font-bold text-white">{u.processHeading}</h2>
           <ul className="grid grid-cols-2 gap-4">

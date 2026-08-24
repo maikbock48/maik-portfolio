@@ -79,6 +79,21 @@ const ExploreMore = () => {
       gsap.set(gridEl, { yPercent: 0, y: -window.innerHeight });
       document.documentElement.style.overflow = "hidden";
 
+      // On mobile, touch swiping should feel reversed relative to desktop wheel
+      // scrolling to reach the "up" panel — checked once per open, not reactive.
+      const isMobileViewport = window.matchMedia("(max-width: 1199px)").matches;
+
+      const advance = () => {
+        if (panelRef.current === "bridge") goTo(gsap, "up");
+      };
+      const retreat = () => {
+        if (panelRef.current === "up") {
+          goTo(gsap, "bridge");
+        } else if (!isAnimatingRef.current) {
+          setOpen(false);
+        }
+      };
+
       observer = Observer.create({
         target: gridEl,
         type: "wheel,touch,pointer",
@@ -86,16 +101,8 @@ const ExploreMore = () => {
         tolerance: 10,
         dragMinimum: 15,
         preventDefault: true,
-        onDown: () => {
-          if (panelRef.current === "bridge") goTo(gsap, "up");
-        },
-        onUp: () => {
-          if (panelRef.current === "up") {
-            goTo(gsap, "bridge");
-          } else if (!isAnimatingRef.current) {
-            setOpen(false);
-          }
-        },
+        onDown: isMobileViewport ? retreat : advance,
+        onUp: isMobileViewport ? advance : retreat,
       });
     })();
 
@@ -192,7 +199,7 @@ const ExploreMore = () => {
                   </p>
                 </div>
 
-                <nav className="absolute bottom-10 md:bottom-14 left-0 right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+                <nav className="absolute top-6 bottom-auto md:top-auto md:bottom-14 left-0 right-0 z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
                   {navPaths.map((link, index) => (
                     <motion.div
                       key={link.key}

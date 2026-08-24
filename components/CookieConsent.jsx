@@ -163,7 +163,7 @@ const CookieConsent = () => {
                 <>
                   <button
                     onClick={acceptAll}
-                    className="rounded-full bg-accent text-primary font-semibold text-sm px-5 py-2.5 hover:bg-accent-hover transition-all"
+                    className="text-white/60 text-sm hover:text-accent transition-colors px-2 py-2.5"
                   >
                     {c.acceptAll}
                   </button>
@@ -175,7 +175,7 @@ const CookieConsent = () => {
                   </button>
                   <button
                     onClick={() => setExpanded(true)}
-                    className="text-white/60 text-sm hover:text-accent transition-colors px-2 py-2.5"
+                    className="rounded-full bg-accent text-primary font-semibold text-sm px-5 py-2.5 hover:bg-accent-hover transition-all"
                   >
                     {c.customize}
                   </button>
