@@ -54,10 +54,10 @@ const BackendDevelopment = () => {
             <span className="w-3 h-3 rounded-full bg-red-500/70" />
             <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
             <span className="w-3 h-3 rounded-full bg-green-500/70" />
-            <span className="ml-4 text-xs text-white/30 font-mono">api/routes/users.js</span>
+            <span className="ml-4 text-xs text-white/55 font-mono">api/routes/users.js</span>
           </div>
           <div className="p-6 text-sm font-mono leading-7 overflow-x-auto">
-            <div><span className="text-white/30">{"// GET /api/users/:id — clean, typed, documented"}</span></div>
+            <div><span className="text-white/55">{"// GET /api/users/:id — clean, typed, documented"}</span></div>
             <div>
               <span className="text-accent">router</span>
               <span className="text-white/60">.get(</span>

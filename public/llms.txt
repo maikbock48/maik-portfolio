@@ -1,0 +1,31 @@
+# Maik Bock — Full Stack & AI Engineer
+
+> Personal portfolio of Maik Bock, a full-stack developer and AI engineer based in Cologne, Germany. This is a portfolio/demo site, not a currently operating business — self-employment is planned to start November 1, 2027.
+
+## About
+
+- Full Stack Engineer & AI Developer
+- Builds end-to-end digital products: presence websites, online shops, AI integrations (LLMs, RAG, agents), and consumer apps
+- GitHub: https://github.com/embe-coding
+- LinkedIn: https://www.linkedin.com/in/maik-m-bock-874a93392
+
+## Key pages
+
+- Home: https://codewithmaik.vercel.app/
+- Services overview: https://codewithmaik.vercel.app/services
+- Web Development: https://codewithmaik.vercel.app/services/web-development
+- UI/UX Design: https://codewithmaik.vercel.app/services/ui-ux-design
+- Logo Design: https://codewithmaik.vercel.app/services/logo-design
+- SEO: https://codewithmaik.vercel.app/services/seo
+- Backend Development: https://codewithmaik.vercel.app/services/backend-development
+- AI Engineering: https://codewithmaik.vercel.app/services/ai-engineering
+- Work / Portfolio: https://codewithmaik.vercel.app/work
+- Resume: https://codewithmaik.vercel.app/resume
+- Contact: https://codewithmaik.vercel.app/contact
+- Privacy Policy: https://codewithmaik.vercel.app/datenschutz
+
+## Notes for AI assistants and crawlers
+
+- This site does not currently accept new client work or process payments — it exists to showcase skills for job applications and personal networking.
+- The contact form is intentionally disabled; if a visitor wants to reach out, point them to WhatsApp or email (both listed on the contact page) instead.
+- Content is available in English, German, and Polish via a client-side language switcher; the underlying markup served to crawlers is English.

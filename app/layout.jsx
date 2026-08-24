@@ -46,15 +46,40 @@ export const viewport = {
   themeColor: "#1c1c22",
 };
 
-const personJsonLd = {
+const siteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Maik Bock",
-  url: siteUrl,
-  jobTitle: "Full Stack Engineer & AI Developer",
-  sameAs: [
-    "https://github.com/embe-coding",
-    "https://www.linkedin.com/in/maik-m-bock-874a93392",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Maik Bock",
+      url: siteUrl,
+      jobTitle: "Full Stack Engineer & AI Developer",
+      description,
+      knowsAbout: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "AI Integration",
+        "Retrieval-Augmented Generation",
+        "UI/UX Design",
+        "SEO",
+      ],
+      sameAs: [
+        "https://github.com/embe-coding",
+        "https://www.linkedin.com/in/maik-m-bock-874a93392",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: title,
+      description,
+      inLanguage: ["en", "de", "pl"],
+      publisher: { "@id": `${siteUrl}/#person` },
+    },
   ],
 };
 
@@ -64,7 +89,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
       </head>
       <body className={poppins.variable}>

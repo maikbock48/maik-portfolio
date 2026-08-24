@@ -93,7 +93,7 @@ const Resume = () => {
             {/* experience */}
             <TabsContent value="experience" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{r.experience.title}</h3>
+                <h2 className="text-4xl font-bold">{r.experience.title}</h2>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {r.experience.description}
                 </p>
@@ -122,7 +122,7 @@ const Resume = () => {
             {/* education */}
             <TabsContent value="education" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{r.education.title}</h3>
+                <h2 className="text-4xl font-bold">{r.education.title}</h2>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {r.education.description}
                 </p>
@@ -152,7 +152,7 @@ const Resume = () => {
             <TabsContent value="skills" className="w-full h-full">
               <div className="flex flex-col gap-[30px]">
                 <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                  <h3 className="text-4xl font-bold">{r.skills.title}</h3>
+                  <h2 className="text-4xl font-bold">{r.skills.title}</h2>
                   <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                     {r.skills.description}
                   </p>
@@ -162,7 +162,10 @@ const Resume = () => {
                     <li key={index}>
                       <TooltipProvider delayDuration={100}>
                         <Tooltip>
-                          <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
+                          <TooltipTrigger
+                            aria-label={skill.name}
+                            className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group"
+                          >
                             <div className="text-6xl group-hover:text-accent transition-all duration-300">
                               {skill.icon}
                             </div>
@@ -181,7 +184,7 @@ const Resume = () => {
             {/* about */}
             <TabsContent value="about" className="w-full text-center xl:text-left">
               <div className="flex flex-col gap-[30px]">
-                <h3 className="text-4xl font-bold">{r.about.title}</h3>
+                <h2 className="text-4xl font-bold">{r.about.title}</h2>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {r.about.description}
                 </p>

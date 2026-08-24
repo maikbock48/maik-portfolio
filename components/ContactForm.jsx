@@ -76,7 +76,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true, fillHeight = fal
     >
       {!compact && (
         <>
-          <h3 className="text-2xl sm:text-3xl xl:text-4xl text-accent break-words">{c.title}</h3>
+          <h1 className="text-2xl sm:text-3xl xl:text-4xl text-accent break-words">{c.title}</h1>
           <p className="text-white/60">{c.subtitle}</p>
         </>
       )}
@@ -104,7 +104,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true, fillHeight = fal
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
       </div>
       <Select value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
-        <SelectTrigger className="w-full">
+        <SelectTrigger aria-label={c.selectService} className="w-full">
           <SelectValue placeholder={c.selectService} />
         </SelectTrigger>
         <SelectContent>

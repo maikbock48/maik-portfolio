@@ -137,6 +137,7 @@ const CookieConsent = () => {
                     type="button"
                     role="switch"
                     aria-checked={analytics}
+                    aria-label={c.analyticsTitle}
                     onClick={() => setAnalytics((v) => !v)}
                     className={`shrink-0 relative w-11 h-6 rounded-full transition-colors ${
                       analytics ? "bg-accent" : "bg-white/15"

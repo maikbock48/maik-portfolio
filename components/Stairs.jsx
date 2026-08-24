@@ -1,15 +1,17 @@
 import { animate, motion } from "framer-motion";
 
-// variants
+// Animates via `y` (a transform) instead of `bottom` (a layout property) — the
+// latter is tracked by the browser's Layout Instability API even though this
+// is a purely decorative overlay, tanking CLS on every page transition.
 const stairAnimation = {
   initial: {
-    bottom: "0%",
+    y: "0%",
   },
   animate: {
-    bottom: "-100%",
+    y: "100%",
   },
   exit: {
-    bottom: ["-100%", "0%"],
+    y: ["100%", "0%"],
   },
 };
 

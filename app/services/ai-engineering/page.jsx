@@ -67,7 +67,7 @@ const AIEngineering = () => {
                     {pipelineIcons[i]}
                   </div>
                   <p className="text-white font-semibold text-sm">{step.label}</p>
-                  <p className="text-white/40 text-xs mt-0.5">{step.sub}</p>
+                  <p className="text-white/55 text-xs mt-0.5">{step.sub}</p>
                 </div>
                 {i < a.pipeline.length - 1 && (
                   <div className="xl:flex hidden items-center px-2 text-accent/50">
@@ -107,7 +107,7 @@ const AIEngineering = () => {
               <div key={uc.n} className="flex flex-col gap-2 border-l-2 border-accent/30 pl-4 hover:border-accent transition-all duration-300">
                 <span className="text-accent text-xs font-mono">{uc.n}</span>
                 <p className="text-white font-semibold text-sm">{uc.t}</p>
-                <p className="text-white/40 text-xs">{uc.d}</p>
+                <p className="text-white/55 text-xs">{uc.d}</p>
               </div>
             ))}
           </div>

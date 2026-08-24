@@ -60,6 +60,7 @@ const Footer = () => {
               href="https://github.com/embe-coding"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub"
               className="w-9 h-9 border border-white/15 rounded-full flex items-center justify-center text-white/60 hover:text-accent hover:border-accent transition-all duration-300"
             >
               <FaGithub />
@@ -68,6 +69,7 @@ const Footer = () => {
               href="https://www.linkedin.com/in/maik-m-bock-874a93392?utm_source=share_via&utm_content=profile&utm_medium=member_android"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn"
               className="w-9 h-9 border border-white/15 rounded-full flex items-center justify-center text-white/60 hover:text-accent hover:border-accent transition-all duration-300"
             >
               <FaLinkedinIn />

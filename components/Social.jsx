@@ -18,6 +18,7 @@ const Social = ({ containerStyles, iconStyles }) => {
           href="https://github.com/embe-coding"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="GitHub"
           className={iconStyles}
           onClick={() => setGithubClicked(true)}
         >
@@ -50,18 +51,19 @@ const Social = ({ containerStyles, iconStyles }) => {
           href="https://www.linkedin.com/in/maik-m-bock-874a93392?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="LinkedIn"
           className={iconStyles}
         >
           <FaLinkedinIn />
         </Link>
 
         {/* YouTube – coming soon */}
-        <button className={iconStyles} onClick={() => setShowPopup(true)}>
+        <button aria-label="YouTube" className={iconStyles} onClick={() => setShowPopup(true)}>
           <FaYoutube />
         </button>
 
         {/* Twitter */}
-        <button className={iconStyles} onClick={() => setShowTwitterPopup(true)}>
+        <button aria-label="Twitter" className={iconStyles} onClick={() => setShowTwitterPopup(true)}>
           <FaTwitter />
         </button>
       </div>
