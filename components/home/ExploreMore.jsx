@@ -199,7 +199,7 @@ const ExploreMore = () => {
                 </ul>
 
                 <div
-                  className="relative z-10"
+                  className="relative z-30"
                   onMouseEnter={openServicesMenu}
                   onMouseLeave={scheduleCloseServicesMenu}
                 >
