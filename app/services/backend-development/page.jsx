@@ -153,7 +153,7 @@ const BackendDevelopment = () => {
           </div>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all whitespace-nowrap mx-auto"
+            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] xl:max-w-[400px] mx-auto"
           >
             {s.getInTouch}
           </Link>

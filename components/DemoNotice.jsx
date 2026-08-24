@@ -1,23 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 
 const STORAGE_KEY = "demo_notice_dismissed";
+const ALWAYS_SHOW_PATHS = ["/", "/contact"];
 
 const DemoNotice = () => {
   const { t } = useLanguage();
   const d = t.demoNotice;
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (ALWAYS_SHOW_PATHS.includes(pathname)) {
+      setVisible(true);
+      return;
+    }
     try {
       if (!window.localStorage.getItem(STORAGE_KEY)) setVisible(true);
     } catch {
       setVisible(true);
     }
-  }, []);
+  }, [pathname]);
 
   const dismiss = () => {
     try {

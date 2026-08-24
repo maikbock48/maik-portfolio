@@ -27,9 +27,10 @@ const persistConsent = (categories) => {
   const record = { id, categories, timestamp: new Date().toISOString() };
 
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(
     JSON.stringify(categories)
-  )}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
+  )}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax${secure}`;
 
   fetch("/api/consent", {
     method: "POST",

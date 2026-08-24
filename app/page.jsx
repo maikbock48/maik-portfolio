@@ -14,6 +14,7 @@ import Process from "@/components/home/Process";
 import Funnel from "@/components/home/Funnel";
 import CtaBanner from "@/components/home/CtaBanner";
 import ExploreMore from "@/components/home/ExploreMore";
+import BackToTop from "@/components/home/BackToTop";
 import { useLanguage } from "@/lib/language-context";
 
 const Home = () => {
@@ -82,6 +83,7 @@ const Home = () => {
       <Funnel />
       <CtaBanner />
       <ExploreMore />
+      <BackToTop />
     </section>
   );
 };

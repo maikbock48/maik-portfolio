@@ -926,7 +926,7 @@ const UIUXDesign = () => {
           <p className="text-white/60 text-sm">{u.ctaText}</p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] mx-auto"
+            className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] xl:max-w-[400px] mx-auto"
           >
             {s.getInTouch}
           </Link>
@@ -1012,7 +1012,7 @@ const UIUXDesign = () => {
               <p className="text-white/60 max-w-[600px]">{u.ctaText}</p>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] mx-auto"
+                className="inline-flex items-center justify-center bg-accent text-primary font-semibold px-8 py-3 rounded-full hover:bg-accent-hover transition-all max-w-[200px] xl:max-w-[400px] mx-auto"
               >
                 {s.getInTouch}
               </Link>
