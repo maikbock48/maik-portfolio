@@ -167,20 +167,20 @@ const ExploreMore = () => {
               {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
               <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
-                <h2 className="relative z-10 h2 -mt-6 xl:-mt-10">{e.title}</h2>
+                <h2 className="relative z-10 h2 -mt-16 sm:-mt-20 xl:-mt-24 mb-8 sm:mb-12">{e.title}</h2>
                 <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
                   {e.points.map((point, index) => (
                     <li
                       key={point}
-                      className={`text-white/70 text-sm sm:text-base ${
-                        index === e.points.length - 1 ? "mb-8 sm:mb-12" : ""
+                      className={`text-white/70 text-sm sm:text-base leading-relaxed ${
+                        index === e.points.length - 1 ? "mb-10 sm:mb-16" : ""
                       }`}
                     >
                       {point}
                     </li>
                   ))}
                 </ul>
-                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-10 sm:mt-14">{e.whatsappText}</p>
+                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-16 sm:mt-24">{e.whatsappText}</p>
                 <div className="relative z-10 flex flex-col items-center gap-3">
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     <a
