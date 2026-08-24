@@ -844,7 +844,7 @@ const UIUXDesign = () => {
             <h2 className="text-2xl font-bold text-white mb-2">{u.showcaseHeading}</h2>
             <p className="text-white/60 text-sm">{u.showcaseSubtitle}</p>
           </div>
-          <div className="grid grid-cols-8 gap-3">
+          <div className="grid grid-cols-6 gap-3">
             {u.showcase.map((item, index) => {
               const Demo = demos[index];
               return (

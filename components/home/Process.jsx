@@ -102,6 +102,7 @@ const Process = () => {
                 poster="/videos/process-showcase-poster.jpg"
                 caption={p.video.caption}
                 comingSoon={p.video.comingSoon}
+                autoPlayOnView={scrolledIntoView}
               />
             </motion.div>
           </div>

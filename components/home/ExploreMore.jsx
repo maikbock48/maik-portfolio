@@ -6,6 +6,7 @@ import { FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import ParticleBackground from "@/components/home/ParticleBackground";
+import ServicesMenuPanel from "@/components/ServicesMenuPanel";
 import { useLanguage } from "@/lib/language-context";
 
 const WHATSAPP_HREF = "https://wa.me/491626310090";
@@ -25,10 +26,24 @@ const ExploreMore = () => {
   const [atBottom, setAtBottom] = useState(false);
   const [open, setOpen] = useState(false);
   const [panel, setPanel] = useState("bridge"); // "bridge" | "up"
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
 
   const gridRef = useRef(null);
   const panelRef = useRef("bridge");
   const isAnimatingRef = useRef(false);
+  const servicesCloseTimer = useRef(null);
+
+  const openServicesMenu = () => {
+    if (servicesCloseTimer.current) {
+      clearTimeout(servicesCloseTimer.current);
+      servicesCloseTimer.current = null;
+    }
+    setServicesMenuOpen(true);
+  };
+
+  const scheduleCloseServicesMenu = () => {
+    servicesCloseTimer.current = setTimeout(() => setServicesMenuOpen(false), 180);
+  };
 
   useEffect(() => {
     const checkBottom = () => {
@@ -114,6 +129,8 @@ const ExploreMore = () => {
       panelRef.current = "bridge";
       isAnimatingRef.current = false;
       setPanel("bridge");
+      if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+      setServicesMenuOpen(false);
     };
   }, [open]);
 
@@ -167,20 +184,54 @@ const ExploreMore = () => {
               {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
               <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
-                <h2 className="relative z-10 h2 -mt-16 sm:-mt-20 xl:-mt-24 mb-8 sm:mb-12">{e.title}</h2>
+                <h2 className="relative z-10 h2 -mt-8 sm:-mt-10 xl:-mt-12 mb-8 sm:mb-12">{e.title}</h2>
                 <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
                   {e.points.map((point, index) => (
                     <li
                       key={point}
                       className={`text-white/70 text-sm sm:text-base leading-relaxed ${
-                        index === e.points.length - 1 ? "mb-10 sm:mb-16" : ""
+                        index === e.points.length - 1 ? "mb-6 sm:mb-8" : ""
                       }`}
                     >
                       {point}
                     </li>
                   ))}
                 </ul>
-                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-16 sm:mt-24">{e.whatsappText}</p>
+
+                <div
+                  className="relative z-10"
+                  onMouseEnter={openServicesMenu}
+                  onMouseLeave={scheduleCloseServicesMenu}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setServicesMenuOpen((v) => !v)}
+                    aria-expanded={servicesMenuOpen}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 text-white/80 font-medium px-6 py-3 hover:border-accent hover:text-accent transition-all"
+                  >
+                    {e.servicesButton}
+                    <FiChevronDown
+                      className={`text-sm transition-transform duration-300 ${
+                        servicesMenuOpen ? "rotate-180 text-accent" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {servicesMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[min(640px,88vw)] z-20"
+                      >
+                        <ServicesMenuPanel onNavigate={() => setServicesMenuOpen(false)} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-6 sm:mt-8">{e.whatsappText}</p>
                 <div className="relative z-10 flex flex-col items-center gap-3">
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     <a

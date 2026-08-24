@@ -1,16 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FiPlay } from "react-icons/fi";
 
-const VideoFrame = ({ src, poster, caption, comingSoon }) => {
+const VideoFrame = ({ src, poster, caption, comingSoon, autoPlayOnView }) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
 
   const handlePlay = () => {
     videoRef.current?.play();
   };
+
+  useEffect(() => {
+    if (!autoPlayOnView || !src || !videoRef.current) return;
+    const video = videoRef.current;
+    video.muted = true;
+    video.loop = true;
+    video.play().catch(() => {});
+  }, [autoPlayOnView, src]);
 
   return (
     <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-accent/25 bg-[#141418] shadow-[0_0_0_1px_rgba(0,217,255,0.08),0_25px_70px_rgba(0,0,0,0.5)]">
