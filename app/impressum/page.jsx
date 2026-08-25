@@ -24,7 +24,13 @@ export default function ImpressumPage() {
 
           <div>
             <h2 className="text-xl font-semibold text-white mb-3">Angaben gemäß § 5 DDG</h2>
-            <p>Maik M. Bock</p>
+            <p>
+              Maik M. Bock
+              <br />
+              Vossbicke 18
+              <br />
+              51702 Bergneustadt
+            </p>
           </div>
 
           <div>
