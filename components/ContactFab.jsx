@@ -187,6 +187,7 @@ const ContactFab = () => {
         onClick={() => setOpen((v) => !v)}
         whileTap={{ scale: 0.92 }}
         aria-label="Contact options"
+        aria-expanded={open}
         className="fixed bottom-6 right-6 xl:bottom-[29px] xl:right-[29px] z-40 w-14 h-14 xl:w-16 xl:h-16 rounded-full bg-accent text-primary flex items-center justify-center text-xl xl:text-2xl shadow-[0_10px_30px_rgba(0,217,255,0.35)] hover:bg-accent-hover transition-colors"
       >
         <motion.span animate={{ rotate: open ? 90 : 0 }} transition={{ duration: 0.2 }}>

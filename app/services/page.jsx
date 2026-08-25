@@ -4,12 +4,20 @@ import { BsArrowDownRight } from "react-icons/bs";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
+import { BreadcrumbStructuredData } from "@/components/StructuredData";
 
 const Services = () => {
   const { t } = useLanguage();
 
   return (
     <section className="min-h-[80vh] flex flex-col justify-center py-12 xl:py-0">
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]}
+      />
+      <h1 className="sr-only">{t.nav.services}</h1>
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0 }}

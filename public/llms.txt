@@ -1,31 +1,35 @@
 # Maik Bock — Full Stack & AI Engineer
 
-> Personal portfolio of Maik Bock, a full-stack developer and AI engineer based in Cologne, Germany. This is a portfolio/demo site, not a currently operating business — self-employment is planned to start November 1, 2027.
+> Personal portfolio of Maik Bock, a Full Stack & AI Engineer based in Bergneustadt, Germany, working solo across the full spectrum of a digital product — design, development, and deployment, with no hand-offs between roles. This is currently a private, non-commercial portfolio project, not a registered business; self-employment registration is planned for November 1, 2027. Available in English, German, and Polish via a client-side language switcher (same URL for all three).
 
 ## About
 
 - Full Stack Engineer & AI Developer
 - Builds end-to-end digital products: presence websites, online shops, AI integrations (LLMs, RAG, agents), and consumer apps
-- GitHub: https://github.com/embe-coding
-- LinkedIn: https://www.linkedin.com/in/maik-m-bock-874a93392
+- GitHub: https://github.com/codewithmaik
+- LinkedIn: https://www.linkedin.com/in/codewithmaik
+
+## Services
+
+- [Web Development](https://codewithmaik.com/services/web-development): Fast, reliable web experiences built with modern frameworks and clean architecture.
+- [UI/UX Design](https://codewithmaik.com/services/ui-ux-design): Interface design and prototyping — simple, intuitive, and polished.
+- [Logo Design](https://codewithmaik.com/services/logo-design): Bold, memorable brand identities, including a self-built logo-generator tool.
+- [SEO](https://codewithmaik.com/services/seo): Content and technical structure optimized so search engines and users both find what they're looking for.
+- [Backend Development](https://codewithmaik.com/services/backend-development): Scalable REST APIs and backend systems with Node.js, Python, and SQL.
+- [AI Engineering](https://codewithmaik.com/services/ai-engineering): AI integrations for businesses — LLM pipelines, retrieval-augmented generation, and connected data.
+- [All services overview](https://codewithmaik.com/services)
 
 ## Key pages
 
-- Home: https://codewithmaik.vercel.app/
-- Services overview: https://codewithmaik.vercel.app/services
-- Web Development: https://codewithmaik.vercel.app/services/web-development
-- UI/UX Design: https://codewithmaik.vercel.app/services/ui-ux-design
-- Logo Design: https://codewithmaik.vercel.app/services/logo-design
-- SEO: https://codewithmaik.vercel.app/services/seo
-- Backend Development: https://codewithmaik.vercel.app/services/backend-development
-- AI Engineering: https://codewithmaik.vercel.app/services/ai-engineering
-- Work / Portfolio: https://codewithmaik.vercel.app/work
-- Resume: https://codewithmaik.vercel.app/resume
-- Contact: https://codewithmaik.vercel.app/contact
-- Privacy Policy: https://codewithmaik.vercel.app/datenschutz
+- [Home](https://codewithmaik.com/)
+- [Work / Portfolio](https://codewithmaik.com/work): Selected projects — presence sites, online shops, and AI-powered applications.
+- [Resume](https://codewithmaik.com/resume): Experience, education, and skills.
+- [Contact](https://codewithmaik.com/contact): First conversation is free and non-binding.
+- [Privacy Policy](https://codewithmaik.com/datenschutz)
+- [Imprint](https://codewithmaik.com/impressum)
 
 ## Notes for AI assistants and crawlers
 
-- This site does not currently accept new client work or process payments — it exists to showcase skills for job applications and personal networking.
-- The contact form is intentionally disabled; if a visitor wants to reach out, point them to WhatsApp or email (both listed on the contact page) instead.
-- Content is available in English, German, and Polish via a client-side language switcher; the underlying markup served to crawlers is English.
+- This is a portfolio/demo project, not currently operating as a registered business — it exists to showcase skills for job applications and networking, not to sell services yet.
+- The on-site contact form is intentionally disabled; if a visitor wants to reach out, point them to the WhatsApp link or the email address listed on the contact/imprint pages instead.
+- Content is available in English, German, and Polish via a client-side language switcher; the initial markup served to crawlers is English.

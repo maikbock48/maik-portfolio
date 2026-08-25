@@ -19,6 +19,7 @@ import Link from "next/link";
 import WorkSliderBtns from "@/components/WorkSliderBtns";
 import VideoFrame from "@/components/VideoFrame";
 import { useLanguage } from "@/lib/language-context";
+import { BreadcrumbStructuredData } from "@/components/StructuredData";
 
 const Work = () => {
   const { t } = useLanguage();
@@ -39,6 +40,13 @@ const Work = () => {
       }}
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
     >
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Work", path: "/work" },
+        ]}
+      />
+      <h1 className="sr-only">{t.nav.work}</h1>
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">

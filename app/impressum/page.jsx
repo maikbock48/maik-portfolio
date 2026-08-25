@@ -1,6 +1,7 @@
 export const metadata = {
   title: "Impressum – Maik Bock",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/impressum" },
 };
 
 export default function ImpressumPage() {
@@ -18,7 +19,7 @@ export default function ImpressumPage() {
               Die Seite dient dazu, Freunden, Kontakten und potenziellen Arbeitgebern meine Fähigkeiten
               als Softwareentwickler zu zeigen. Eine Anmeldung als Selbstständiger/Gewerbetreibender ist
               zum 1. November 2027 geplant — sobald das erfolgt ist, wird dieses Impressum um die dann
-              erforderlichen vollständigen Angaben (u. a. Anschrift und Umsatzsteuer-Status) ergänzt.
+              erforderlichen weiteren Angaben (u. a. Umsatzsteuer-Status) ergänzt.
             </p>
           </div>
 

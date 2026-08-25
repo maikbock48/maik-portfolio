@@ -1,5 +1,6 @@
 export const metadata = {
   title: "Datenschutzerklärung – Maik Bock",
+  alternates: { canonical: "/datenschutz" },
 };
 
 const Placeholder = ({ children }) => (

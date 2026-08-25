@@ -25,7 +25,7 @@ const Header = () => {
             if (pathname === "/") setShakeKey((k) => k + 1);
           }}
         >
-          <h1
+          <p
             className="relative inline-block text-4xl font-semibold"
             onMouseEnter={() => setRotation((r) => r + 360)}
           >
@@ -38,7 +38,7 @@ const Header = () => {
             >
               .
             </motion.span>
-          </h1>
+          </p>
         </Link>
 
         {/* desktop nav */}

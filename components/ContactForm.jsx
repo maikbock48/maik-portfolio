@@ -94,13 +94,13 @@ const ContactForm = ({ compact = false, showFunnelChips = true, fillHeight = fal
         </div>
       )}
       <div className={`grid grid-cols-1 md:grid-cols-2 ${compact ? "gap-4" : "gap-6"}`}>
-        <Input type="text" placeholder={c.firstname} value={formData.firstname}
+        <Input type="text" placeholder={c.firstname} aria-label={c.firstname} value={formData.firstname}
           onChange={(e) => setFormData({ ...formData, firstname: e.target.value })} required />
-        <Input type="text" placeholder={c.lastname} value={formData.lastname}
+        <Input type="text" placeholder={c.lastname} aria-label={c.lastname} value={formData.lastname}
           onChange={(e) => setFormData({ ...formData, lastname: e.target.value })} required />
-        <Input type="email" placeholder={c.email} value={formData.email}
+        <Input type="email" placeholder={c.email} aria-label={c.email} value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
-        <Input type="tel" placeholder={c.phone} value={formData.phone}
+        <Input type="tel" placeholder={c.phone} aria-label={c.phone} value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
       </div>
       <Select value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
@@ -123,6 +123,7 @@ const ContactForm = ({ compact = false, showFunnelChips = true, fillHeight = fal
       <Textarea
         className={fillHeight ? "flex-1 min-h-[110px]" : "h-[110px]"}
         placeholder={c.message}
+        aria-label={c.message}
         value={formData.message}
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
         required

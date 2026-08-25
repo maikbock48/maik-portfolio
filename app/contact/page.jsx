@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
 import ContactForm from "@/components/ContactForm";
 import { useLanguage } from "@/lib/language-context";
+import { BreadcrumbStructuredData } from "@/components/StructuredData";
 
 const VCARD = [
   "BEGIN:VCARD",
@@ -36,6 +37,12 @@ const Contact = () => {
       }}
       className="py-2"
     >
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
+      />
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}

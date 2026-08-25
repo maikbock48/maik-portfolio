@@ -20,6 +20,12 @@ export const LanguageProvider = ({ children }) => {
     if (detected) setLang(detected);
   }, []);
 
+  // Keep the document's lang attribute in sync so screen readers and
+  // crawlers know which language is actually being displayed.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const toggle = () => setLang((l) => l === "en" ? "de" : l === "de" ? "pl" : "en");
   const t = translations[lang];
 

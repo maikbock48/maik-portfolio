@@ -27,6 +27,7 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title,
     description,
@@ -56,6 +57,14 @@ const siteJsonLd = {
       url: siteUrl,
       jobTitle: "Full Stack Engineer & AI Developer",
       description,
+      email: "coding.maikel@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Vossbicke 18",
+        postalCode: "51702",
+        addressLocality: "Bergneustadt",
+        addressCountry: "DE",
+      },
       knowsAbout: [
         "Next.js",
         "React",
@@ -93,10 +102,18 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={poppins.variable}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2.5 focus:text-primary focus:font-semibold"
+        >
+          Skip to main content
+        </a>
         <LanguageProvider>
           <Header />
           <StairTransition />
-          <PageTransition>{children}</PageTransition>
+          <main id="main-content">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
           <ContactFab />
           <CookieConsent />

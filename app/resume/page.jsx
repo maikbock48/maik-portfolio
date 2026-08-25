@@ -22,6 +22,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
+import { BreadcrumbStructuredData } from "@/components/StructuredData";
 
 const skillList = [
   { icon: <FaHtml5 />, name: "html 5" },
@@ -77,6 +78,13 @@ const Resume = () => {
       }}
       className="min-h-[80vh] flex items-center justify-center py-12 xl:py-0"
     >
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Resume", path: "/resume" },
+        ]}
+      />
+      <h1 className="sr-only">{t.nav.resume}</h1>
       <div className="container mx-auto">
         <Tabs
           defaultValue="experience"
