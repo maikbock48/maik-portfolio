@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
@@ -237,28 +238,35 @@ const ExploreMore = () => {
                       }`}
                     />
                   </button>
+                  {isCompactMenu && typeof document !== "undefined" && createPortal(
+                    <AnimatePresence>
+                      {servicesMenuOpen && (
+                        <>
+                          <motion.div
+                            key="services-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={() => setServicesMenuOpen(false)}
+                            className="fixed inset-0 z-[60] bg-primary/70 backdrop-blur-sm"
+                          />
+                          <motion.div
+                            key="services-panel"
+                            initial={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
+                            animate={{ opacity: 1, x: "-50%", y: "-50%", scale: 1 }}
+                            exit={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
+                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                            className="fixed left-1/2 top-1/2 z-[61] w-[min(420px,88vw)] max-h-[80vh] overflow-y-auto"
+                          >
+                            <ServicesMenuPanel solid onNavigate={() => setServicesMenuOpen(false)} />
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>,
+                    document.body
+                  )}
                   <AnimatePresence>
-                    {servicesMenuOpen && isCompactMenu && (
-                      <>
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          onClick={() => setServicesMenuOpen(false)}
-                          className="fixed inset-0 z-10 bg-primary/70 backdrop-blur-sm"
-                        />
-                        <motion.div
-                          initial={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
-                          animate={{ opacity: 1, x: "-50%", y: "-50%", scale: 1 }}
-                          exit={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
-                          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                          className="fixed left-1/2 top-1/2 z-20 w-[min(420px,88vw)] max-h-[80vh] overflow-y-auto"
-                        >
-                          <ServicesMenuPanel solid onNavigate={() => setServicesMenuOpen(false)} />
-                        </motion.div>
-                      </>
-                    )}
                     {servicesMenuOpen && !isCompactMenu && (
                       <motion.div
                         initial={{ opacity: 0, x: "-50%", y: 10, scale: 0.98 }}
