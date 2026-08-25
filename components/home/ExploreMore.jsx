@@ -184,13 +184,13 @@ const ExploreMore = () => {
               {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
               <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
-                <h2 className="relative z-10 h2 -mt-8 sm:-mt-10 xl:-mt-12 mb-8 sm:mb-12">{e.title}</h2>
+                <h2 className="relative z-10 h2 mt-4 sm:-mt-10 xl:-mt-12 mb-8 sm:mb-12">{e.title}</h2>
                 <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
                   {e.points.map((point, index) => (
                     <li
                       key={point}
-                      className={`text-white/70 text-sm sm:text-base leading-relaxed ${
-                        index === e.points.length - 1 ? "mb-6 sm:mb-8" : ""
+                      className={`text-white/70 text-sm sm:text-base leading-snug sm:leading-relaxed ${
+                        index === e.points.length - 1 ? "mb-2 sm:mb-8" : ""
                       }`}
                     >
                       {point}
@@ -219,11 +219,11 @@ const ExploreMore = () => {
                   <AnimatePresence>
                     {servicesMenuOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        initial={{ opacity: 0, x: "-50%", y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, x: "-50%", y: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: "-50%", y: 8, scale: 0.98 }}
                         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[min(640px,88vw)] z-20"
+                        className="absolute left-1/2 top-full pt-4 w-[min(640px,88vw)] z-20"
                       >
                         <ServicesMenuPanel solid onNavigate={() => setServicesMenuOpen(false)} />
                       </motion.div>
@@ -231,7 +231,7 @@ const ExploreMore = () => {
                   </AnimatePresence>
                 </div>
 
-                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-6 sm:mt-8">{e.whatsappText}</p>
+                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-2 sm:mt-8">{e.whatsappText}</p>
                 <div className="relative z-10 flex flex-col items-center gap-3">
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     <a
