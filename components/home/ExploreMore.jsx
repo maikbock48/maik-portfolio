@@ -27,6 +27,7 @@ const ExploreMore = () => {
   const [open, setOpen] = useState(false);
   const [panel, setPanel] = useState("bridge"); // "bridge" | "up"
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
+  const [isCompactMenu, setIsCompactMenu] = useState(false);
 
   const gridRef = useRef(null);
   const panelRef = useRef("bridge");
@@ -44,6 +45,16 @@ const ExploreMore = () => {
   const scheduleCloseServicesMenu = () => {
     servicesCloseTimer.current = setTimeout(() => setServicesMenuOpen(false), 180);
   };
+
+  // Below the `sm` breakpoint the services dropdown opens as a centered
+  // overlay instead of anchored under the button (see servicesMenuOpen block).
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsCompactMenu(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const checkBottom = () => {
@@ -182,15 +193,25 @@ const ExploreMore = () => {
 
             <div ref={gridRef} className="relative" style={{ height: "200vh", transform: "translateY(-100vh)" }}>
               {/* "the only way is up" panel — sits above the bridge panel in the container; reached with a normal (down) scroll, content animates upward */}
-              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
+              <div className="relative h-screen w-screen flex flex-col items-center justify-center text-center px-6 gap-3 sm:gap-4 overflow-hidden">
                 <ParticleBackground count={70} className="opacity-90" />
-                <h2 className="relative z-10 h2 mt-4 sm:-mt-10 xl:-mt-12 mb-8 sm:mb-12">{e.title}</h2>
-                <ul className="relative z-10 flex flex-col gap-3 max-w-[560px]">
+                <h2 className="relative z-10 h2 mt-16 sm:-mt-10 xl:-mt-12 mb-8 sm:mb-12">{e.title}</h2>
+
+                {/* Mobile: first three points read as one flowing paragraph to save vertical space */}
+                <div className="relative z-10 sm:hidden max-w-[560px] space-y-2">
+                  <p className="text-white/70 text-sm leading-snug">
+                    {e.points.slice(0, 3).join(". ")}.
+                  </p>
+                  <p className="text-white/70 text-sm leading-snug">{e.points[3]}</p>
+                </div>
+
+                {/* Tablet/desktop: original one-point-per-line list */}
+                <ul className="relative z-10 hidden sm:flex flex-col gap-3 max-w-[560px]">
                   {e.points.map((point, index) => (
                     <li
                       key={point}
-                      className={`text-white/70 text-sm sm:text-base leading-snug sm:leading-relaxed ${
-                        index === e.points.length - 1 ? "mb-2 sm:mb-8" : ""
+                      className={`text-white/70 text-sm sm:text-base leading-relaxed ${
+                        index === e.points.length - 1 ? "mb-6 sm:mb-8" : ""
                       }`}
                     >
                       {point}
@@ -217,7 +238,28 @@ const ExploreMore = () => {
                     />
                   </button>
                   <AnimatePresence>
-                    {servicesMenuOpen && (
+                    {servicesMenuOpen && isCompactMenu && (
+                      <>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          onClick={() => setServicesMenuOpen(false)}
+                          className="fixed inset-0 z-10 bg-primary/70 backdrop-blur-sm"
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
+                          animate={{ opacity: 1, x: "-50%", y: "-50%", scale: 1 }}
+                          exit={{ opacity: 0, x: "-50%", y: "-50%", scale: 0.92 }}
+                          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="fixed left-1/2 top-1/2 z-20 w-[min(420px,88vw)] max-h-[80vh] overflow-y-auto"
+                        >
+                          <ServicesMenuPanel solid onNavigate={() => setServicesMenuOpen(false)} />
+                        </motion.div>
+                      </>
+                    )}
+                    {servicesMenuOpen && !isCompactMenu && (
                       <motion.div
                         initial={{ opacity: 0, x: "-50%", y: 10, scale: 0.98 }}
                         animate={{ opacity: 1, x: "-50%", y: 0, scale: 1 }}
@@ -231,7 +273,7 @@ const ExploreMore = () => {
                   </AnimatePresence>
                 </div>
 
-                <p className="relative z-10 text-white/60 text-sm max-w-[420px] mt-2 sm:mt-8">{e.whatsappText}</p>
+                <p className="relative z-10 text-white/60 text-sm max-w-[420px] sm:mt-8">{e.whatsappText}</p>
                 <div className="relative z-10 flex flex-col items-center gap-3">
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     <a
