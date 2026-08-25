@@ -99,7 +99,7 @@ const Process = () => {
             >
               <VideoFrame
                 src="/videos/process-showcase.mp4"
-                poster="/videos/process-showcase-poster.jpg"
+                poster="/videos/process-showcase-poster.webp"
                 caption={p.video.caption}
                 comingSoon={p.video.comingSoon}
                 autoPlayOnView={scrolledIntoView}

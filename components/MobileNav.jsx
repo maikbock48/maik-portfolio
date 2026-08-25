@@ -1,6 +1,6 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
@@ -43,25 +43,26 @@ const MobileNav = () => {
               hoveredIndex === index || (isActive && hoveredIndex === null);
 
             return (
-              <Link
-                href={link.path}
-                key={index}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className={`${
-                  isActive ? "text-accent" : ""
-                } text-xl capitalize hover:text-accent transition-colors relative pb-1`}
-              >
-                {t.nav[link.key]}
-                {showUnderline && (
-                  <motion.div
-                    layoutId="mobileUnderline"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
+              <SheetClose asChild key={index}>
+                <Link
+                  href={link.path}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`${
+                    isActive ? "text-accent" : ""
+                  } text-xl capitalize hover:text-accent transition-colors relative pb-1`}
+                >
+                  {t.nav[link.key]}
+                  {showUnderline && (
+                    <motion.div
+                      layoutId="mobileUnderline"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </SheetClose>
             );
           })}
         </nav>

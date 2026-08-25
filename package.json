@@ -34,6 +34,12 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
+  "browserslist": [
+    "chrome >= 100",
+    "edge >= 100",
+    "firefox >= 100",
+    "safari >= 15.4"
+  ],
   "devDependencies": {
     "@remotion/bundler": "^4.0.516",
     "@remotion/cli": "^4.0.516",
