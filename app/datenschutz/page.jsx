@@ -28,7 +28,7 @@ export default function DatenschutzPage() {
             <p>
               Diese Website ist ein privates, nicht-kommerzielles Portfolio-Projekt und bietet aktuell
               keine gewerblichen Dienstleistungen an. Eine Anmeldung als Selbstständiger ist zum
-              1. November 2027 geplant. Die nachfolgenden Angaben gelten unabhängig davon bereits jetzt
+              1. Dezember 2026 geplant. Die nachfolgenden Angaben gelten unabhängig davon bereits jetzt
               für alle personenbezogenen Daten, die über diese Website verarbeitet werden.
             </p>
           </div>

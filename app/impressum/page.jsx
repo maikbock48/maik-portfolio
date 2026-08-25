@@ -18,7 +18,7 @@ export default function ImpressumPage() {
               aktuell keine gewerblichen Dienstleistungen angeboten und keine Aufträge entgegengenommen.
               Die Seite dient dazu, Freunden, Kontakten und potenziellen Arbeitgebern meine Fähigkeiten
               als Softwareentwickler zu zeigen. Eine Anmeldung als Selbstständiger/Gewerbetreibender ist
-              zum 1. November 2027 geplant — sobald das erfolgt ist, wird dieses Impressum um die dann
+              zum 1. Dezember 2026 geplant — sobald das erfolgt ist, wird dieses Impressum um die dann
               erforderlichen weiteren Angaben (u. a. Umsatzsteuer-Status) ergänzt.
             </p>
           </div>

@@ -1,6 +1,6 @@
 # Maik Bock — Full Stack & AI Engineer
 
-> Personal portfolio of Maik Bock, a Full Stack & AI Engineer based in Bergneustadt, Germany, working solo across the full spectrum of a digital product — design, development, and deployment, with no hand-offs between roles. This is currently a private, non-commercial portfolio project, not a registered business; self-employment registration is planned for November 1, 2027. Available in English, German, and Polish via a client-side language switcher (same URL for all three).
+> Personal portfolio of Maik Bock, a Full Stack & AI Engineer based in Bergneustadt, Germany, working solo across the full spectrum of a digital product — design, development, and deployment, with no hand-offs between roles. This is currently a private, non-commercial portfolio project, not a registered business; self-employment registration is planned for December 1, 2026. Available in English, German, and Polish via a client-side language switcher (same URL for all three).
 
 ## About
 
